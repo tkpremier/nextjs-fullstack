@@ -1,0 +1,20 @@
+{
+  "editor.formatOnSave": true,
+  "eslint.format.enable": false,
+  "eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue", "markdown", "scss"],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "eslint.run": "onSave",
+  "prettier.configPath": ".prettierrc",
+  "prettier.prettierPath": "node_modules/prettier",
+  "prettier.printWidth": 120,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

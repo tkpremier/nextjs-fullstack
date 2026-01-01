@@ -1,0 +1,16 @@
+data-dump.sql
+full-data-dump.sql
+**/node_modules
+**/build
+**/dist
+**/out
+**/next-env.d.ts
+**/next.config.mjs
+**/next.config.js
+**/next.config.ts
+**/next.config.json
+**/next.config.yml
+**/next.config.yaml
+**/next.config.html
+**/yarn-error.log
+**/yarn.lock

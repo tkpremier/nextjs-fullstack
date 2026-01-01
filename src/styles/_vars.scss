@@ -1,0 +1,77 @@
+// asset paths
+$asideIcons: '/images/layout/aside-icons.png';
+$asideIcons2x: '/images/layout/aside-icons-2x.png';
+$limelight: 'https://phillips.vo.llnwd.net/v1/web_prod/';
+$basefontsize: 16px;
+$mobileHeader: 60px;
+$saleBanner: 43px;
+$tiny-font: 12;
+$medium-font: 15;
+$lg-font: 18;
+$xlg-font: 25;
+$tiny-fontsize: 12px;
+$sm-fontsize: 13px;
+$medium-fontsize: 15px;
+$basefontsize: 16px;
+$lg-fontsize: 18px;
+$extra-large-fontsize: 25px;
+
+// marginsizes
+$marginsize: 30px;
+$sm-marginsize: 15px;
+$md-marginsize: 30px;
+$mobileMargin: 15px;
+$asidewidth: 225px;
+
+// responsive breakpoints
+$tiny-bp: 321px;
+$large-phone-bp: 624px;
+$sm-bp: 720px;
+$show-info-bp: 867px;
+$md-bp: 1020px;
+$ipad-landscape-bp: 1024px;
+$lg-bp: 1560px;
+$xl-bp: 1900px;
+
+$mobileHeader: 60px;
+$desktopHeader: 90px;
+$mobileSaleBanner: 65px;
+$desktopSaleBanner: 43px;
+$maxContainer: 1200px;
+
+// colors
+$borderColor: hsla(129, 33%, 77%, 1);
+$textColor: hsla(95, 45%, 50%, 1);
+$ryan-grey: #adadad;
+$ryan-dark-grey: #7d7d7d;
+$ryan-light-grey: #f4f4f4;
+$ryan-zambezi: #5b5b5b;
+$ryan-night-black: #323232;
+$ryan-soft-black: #535050;
+$ryan-cornflower-blue: #4a90e2;
+$ryan-white: #fafafa;
+$sold-red: #dc116d;
+$error-red: #ff0000;
+$deep-pink: #ff0086;
+$opaque-grey: rgba(0, 0, 0, 0.9);
+$black: #000;
+$white: #fff;
+$slate-grey: #eaeaea;
+$success-green: rgba(0, 200, 0, 0.5);
+$failure-red: rgba(200, 0, 0, 0.5);
+$borderColor: #ccc;
+$placeholder-grey: rgb(117, 117, 117);
+$borderDark: #000;
+$borderMid: #a4a4a4;
+$greyOfTheBeast: #666;
+$dark: #999;
+$midDark: #a4a4a4;
+$midLight: #dfdfdf;
+$light: #f2f2f2;
+$hairline-grey: #9b9b9b;
+
+@mixin override-button-defaults {
+  background: none;
+  border: none;
+  outline: none;
+}

@@ -1,0 +1,120 @@
+@use 'vars' as *;
+
+.hamBurger {
+  background: transparent;
+  border: none;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  padding: 0;
+  @media screen and (min-width: $large-phone-bp) {
+    display: none;
+  }
+}
+.header {
+  width: 100%;
+  min-height: 55px;
+  border-bottom: 1px solid #b1d8b7;
+  box-shadow: 0px 4px 4px hsla(95, 45%, 50%, 0.33);
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  z-index: 150;
+  // &Item {
+  //   flex: 1 1 auto;
+  // }
+  &Nav {
+    width: 100%;
+    position: relative;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    &Item {
+      display: none;
+      @media screen and (min-width: $large-phone-bp) {
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+      }
+      &Menu {
+        display: flex;
+        align-items: center;
+        @media screen and (min-width: $large-phone-bp) {
+          display: none;
+        }
+      }
+      &Name {
+        display: flex;
+        align-items: center;
+        flex: 0 0 auto;
+      }
+      &Logo {
+        position: absolute;
+        right: 15px;
+        display: flex;
+        align-items: center;
+        margin-right: 0;
+        &Image {
+          width: 48px;
+          height: 48px;
+        }
+      }
+    }
+  }
+  // <ul>
+  &Wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    padding: 0 1rem;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    max-width: $maxContainer;
+    margin: 0 auto;
+    position: relative;
+    @media screen and (min-width: calc($maxContainer + 2rem)) {
+      padding: 0;
+    }
+  }
+}
+
+.logo {
+  color: $textColor;
+  font-weight: 700;
+  font-size: 24px;
+  margin: 0;
+  text-shadow: 0px 4px 4px hsla(0, 0%, 0%, 0.25);
+}
+
+.offCanvasNav {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  &Item {
+    &Close {
+      position: absolute;
+      right: 0;
+      color: $textColor;
+    }
+  }
+  &Wrapper {
+    position: absolute;
+    left: 1rem;
+    right: 0;
+    bottom: 0;
+    top: 3rem;
+    z-index: -1;
+    transform: translateX(calc(-100% - 1rem));
+    transition: transform 300ms cubic-bezier(1, 0, 0, 1);
+    &IsActive {
+      z-index: 1;
+      background: #fff;
+      transform: translateX(0);
+    }
+  }
+}

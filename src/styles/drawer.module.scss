@@ -1,0 +1,32 @@
+.expandable {
+  text-indent: 0px;
+  width: 100%;
+  position: relative;
+  &__button {
+    outline: none;
+    padding: 12px 0 12px 28px;
+    width: 100%;
+    font-size: 0.75rem;
+    font-weight: normal;
+    text-align: left;
+    text-transform: uppercase;
+    border: none;
+    background-color: #ffffff;
+    background-image: url('/images/chevron_up.svg');
+    background-size: 24px 24px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    &__closed {
+      background-image: url('/images/chevron_down.svg');
+    }
+  }
+}
+
+.panel {
+  padding: 0 15px;
+  transition: height 200ms;
+  overflow: hidden;
+  &__closed {
+    height: 0;
+  }
+}

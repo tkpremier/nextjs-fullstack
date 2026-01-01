@@ -1,0 +1,101 @@
+@use 'vars' as *;
+
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  text-align: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  h3 {
+    text-align: center;
+    font-size: 24px;
+    line-height: 32px;
+    color: #323232;
+    align-self: center;
+  }
+  label {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: left;
+    width: 100%;
+  }
+  input:not([type='submit']),
+  textarea {
+    background: #fff;
+    margin: 0 auto 15px auto;
+    padding: 6px 0 6px 20px;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 1px;
+    color: #323232;
+    width: 100%;
+    border: 1px solid $ryan-grey;
+    border-radius: 0;
+    display: block;
+    min-height: 42px;
+    // max-width: 90%;
+    appearance: none;
+    @media screen and (min-width: $md-bp) {
+      max-width: 700px;
+    }
+    &.error,
+    &.val-danger {
+      box-shadow: 0 0 2px 1px rgb(210, 35, 42);
+      border-radius: 1px;
+    }
+    &.last {
+      margin-bottom: 15px * 2;
+    }
+    &[type='checkbox'] {
+      width: 26px;
+      margin: 0 15px 0 0;
+    }
+    &:-webkit-autofill,
+    &:autofill {
+      color: #323232;
+    }
+    &::placeholder {
+      color: $ryan-grey;
+      //padding-top: 2.5px;
+      font-size: $tiny-fontsize;
+      line-height: em(18, $tiny-font);
+    }
+    &::-webkit-input-placeholder,
+    &:-moz-placeholder /* Firefox 18- */,
+    &::-moz-placeholder /* Firefox 19+ */,
+    &:-ms-input-placeholder {
+      color: $ryan-grey;
+      //padding-top: 2.5px;
+      font-size: $tiny-fontsize;
+      line-height: em(18, $tiny-font);
+    }
+    &:-moz-placeholder {
+      /* Firefox 18- */
+      color: $ryan-grey;
+      //padding-top: 2.5px;
+      font-size: $tiny-fontsize;
+      line-height: em(18, $tiny-font);
+      padding-left: calc($marginsize/4);
+    }
+    &::-moz-placeholder {
+      /* Firefox 19+ */
+      color: $ryan-grey;
+      //padding-top: 2.5px;
+      font-size: $tiny-fontsize;
+      line-height: em(18, $tiny-font);
+      padding-left: calc($marginsize/4);
+    }
+    &:-ms-input-placeholder {
+      color: $ryan-grey;
+      //padding-top: 2.5px;
+      font-size: $tiny-fontsize;
+      line-height: em(18, $tiny-font);
+      padding-left: calc($marginsize/4);
+    }
+    &.user-form--no-mgn-btm {
+      margin-bottom: 0;
+    }
+  }
+}

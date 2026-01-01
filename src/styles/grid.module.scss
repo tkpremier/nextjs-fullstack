@@ -1,0 +1,47 @@
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 30px auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
+  flex-flow: row nowrap;
+  @media screen and (min-width: 480px) {
+    grid-template-columns: repeat(2, calc(50% - (20px / 2)));
+    column-gap: 20px;
+  }
+  @media screen and (min-width: 769px) {
+    grid-template-columns: repeat(4, calc(25% - (60px / 4)));
+  }
+  &Controls {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background: #ccc;
+  }
+  &Item {
+    padding: 0;
+    margin: 0;
+    // width: 50%;
+  }
+}
+
+.checkbox {
+  &Wrapper {
+    width: 100%;
+    max-width: 100%; // Constrain to parent width
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 10px;
+    min-width: 0; // Allow shrinking below content size
+
+    // Constrain flex children to prevent expansion
+    > * {
+      flex-shrink: 0; // Prevent items from shrinking
+      min-width: 0; // Allow items to shrink if needed
+    }
+  }
+}

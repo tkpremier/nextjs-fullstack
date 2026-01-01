@@ -1,0 +1,55 @@
+---
+description: Docker Project context, set up with Docker compose files, database, TypeScript api application, TypeScript client application
+globs: [**/*]
+alwaysApply: true
+---
+
+## Architecture Overview
+
+- **Database**: PostgreSQL 16 running in Docker container
+- **API**: Express.js TypeScript application with webpack bundling, Auth0/OpenID Connect authentication, JWT token verification
+- **Client**: Next.js 16 TypeScript application with React 19, SCSS styling
+- **Orchestration**: Docker Compose with custom bridge network (tk_net)
+
+## Key Technologies
+
+- **API Stack**: Express 5, TypeScript, webpack, PostgreSQL (pg), Auth0, JWT
+- **Client Stack**: Next.js 16, React 19, TypeScript, SCSS, CKEditor 5
+- **Database**: PostgreSQL 16 with persistent volumes
+- **Build Tools**: webpack (API), Next.js build system (client)
+
+## Development Guidelines
+
+- API uses webpack for bundling server-side code
+- Client uses Next.js App Router (app/ directory structure)
+- Both applications use TypeScript with strict type checking
+- Environment variables required for Auth0, database connections, and API URLs
+- API includes CORS configuration for client origins
+- Database connection pooling handled via custom db services
+- When creating new types, put all the types into the respective types folder, `api/src/types/index.ts` or `client/src/types/index.ts`
+
+## File Structure Notes
+
+- API routes defined in `api/src/api/routes.ts`
+- API middleware includes `verifyAuth.ts` for JWT token verification
+- Client uses Next.js App Router with pages in `client/app/`
+- Shared types may exist in respective `types/` directories
+- Database migrations/queries in `api/db/dev/`
+
+## Docker Configuration
+
+- Services communicate via `tk_net` bridge network
+- Database health checks configured
+- Volume mounts for database persistence (`./db-data`)
+- API depends on database health, client depends on API
+- Run `docker compose -f docker-compose.yml -f docker-compose.local.yml up -d --build` to build and run local Docker container
+
+## Package Management
+
+- Use **yarn** as the package manager for both API and client applications
+- Run `yarn install` to install dependencies
+- Use `yarn add` and `yarn remove` for dependency management
+
+## Command Line / Terminal Configuration
+
+- Use **zsh** for all scripts

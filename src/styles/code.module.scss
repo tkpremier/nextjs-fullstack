@@ -1,0 +1,26 @@
+.code {
+  &Row {
+    width: 100%;
+    display: block;
+    max-width: 100%;
+  }
+}
+
+.form {
+  position: relative;
+  margin-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  &Label {
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column nowrap;
+    font-size: 14px;
+    line-height: 20px;
+    color: #5b5b5b;
+    width: 100%;
+  }
+}

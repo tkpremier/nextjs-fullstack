@@ -1,5 +1,5 @@
-import { DriveDbSlider } from '../../../src/components/model/Slider';
-import handleResponse from '../../../src/utils/handleResponse';
+import { DriveDbSlider } from '@/components/model/Slider';
+import handleResponse from '@/utils/handleResponse';
 
 const getModel = async (id: string) => {
   try {

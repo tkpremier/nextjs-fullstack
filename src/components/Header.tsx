@@ -1,17 +1,17 @@
 'use client';
+import buttonStyles from '@/styles/button.module.scss';
+import styles from '@/styles/header.module.scss';
+import utilStyles from '@/styles/utils.module.scss';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { Suspense, useCallback, useContext, useMemo, useState } from 'react';
-import { UserContext } from '../context/user';
-import buttonStyles from '../styles/button.module.scss';
-import styles from '../styles/header.module.scss';
-import utilStyles from '../styles/utils.module.scss';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 
 export const Header = () => {
   const [isOpen, toggleOffCanvas] = useState(false);
-  const [user] = useContext(UserContext);
+  const { user } = useUser();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -21,9 +21,7 @@ export const Header = () => {
   }, [pathname, searchParams]);
 
   const loginUrl = useMemo(() => {
-    return `${process.env.NEXT_PUBLIC_CLIENTURL}/login${
-      currentUrl ? `?returnTo=${encodeURIComponent(currentUrl)}` : ''
-    }`;
+    return `/auth/login${currentUrl ? `?returnTo=${encodeURIComponent(currentUrl)}` : ''}`;
   }, [currentUrl]);
 
   const handleToggle = useCallback(() => {
@@ -57,15 +55,9 @@ export const Header = () => {
             <li className={styles.headerNavItem}>
               <Link href="/interview">Interviews</Link>
             </li>
-            {user ? (
-              <li className={styles.headerNavItem}>
-                <Link href={`${process.env.NEXT_PUBLIC_CLIENTURL}/logout`}>Logout</Link>
-              </li>
-            ) : (
-              <li className={styles.headerNavItem}>
-                <Link href={loginUrl}>Login</Link>
-              </li>
-            )}
+            <li className={styles.headerNavItem}>
+              {user ? <Link href="/auth/logout">Logout</Link> : <Link href={loginUrl}>Login</Link>}
+            </li>
             <li className={classNames(styles.headerNavItem, styles.headerNavItemLogo)}>
               <button
                 className={classNames(buttonStyles.card, { [buttonStyles.cardIsFlipped]: isOpen })}
@@ -115,15 +107,9 @@ export const Header = () => {
           <li className={styles.offCanvasNavItem}>
             <Link href="/interview">Interviews</Link>
           </li>
-          {user ? (
-            <li className={styles.offCanvasNavItem}>
-              <Link href={`${process.env.NEXT_PUBLIC_CLIENTURL}/logout`}>Logout</Link>
-            </li>
-          ) : (
-            <li className={styles.offCanvasNavItem}>
-              <Link href={loginUrl}>Login</Link>
-            </li>
-          )}
+          <li className={styles.offCanvasNavItem}>
+            {user ? <a href="/auth/logout">Logout</a> : <a href={loginUrl}>Login</a>}
+          </li>
           <li className={styles.offCanvasNavItem}>
             <Link href="/profile">Profile</Link>
           </li>

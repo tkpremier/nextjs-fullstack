@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
-import { Interview } from '../types';
-import handleResponse from '../utils/handleResponse';
+import { Interview } from '@/types';
+import handleResponse from '@/utils/handleResponse';
 
 export const InterviewContext = createContext<
   [Interview[], (url: string, options?: RequestInit & { body?: Interview }) => Promise<{ data: Interview[] } | Error>]

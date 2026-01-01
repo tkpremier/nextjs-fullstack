@@ -1,8 +1,8 @@
 'use client';
 import serialize from 'form-serialize';
 import React from 'react';
-import { insertionSort } from '../../../../src/code-examples/sort';
-import { LearnForm } from '../../../../src/components/learn/Form';
+import { insertionSort } from '@/code-examples/sort';
+import { LearnForm } from '@/components/learn/Form';
 
 export const InsertionSortForm = () => {
   const handleInsertionSort = <T extends number[] | string[]>(e: React.FormEvent<HTMLFormElement>) => {

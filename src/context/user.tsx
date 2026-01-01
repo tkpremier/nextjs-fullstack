@@ -1,7 +1,7 @@
 'use client';
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useEffect, useState } from 'react';
-import { User } from '../types';
-import handleResponse from '../utils/handleResponse';
+import { User } from '@/types';
+import handleResponse from '@/utils/handleResponse';
 
 export const UserContext = createContext<[User, Dispatch<SetStateAction<User>>]>([undefined, () => {}]);
 

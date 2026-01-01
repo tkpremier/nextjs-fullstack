@@ -1,10 +1,10 @@
 'use client';
 import { useCallback } from 'react';
-import styles from '../../styles/grid.module.scss';
-import { DBDataResponse, MergedData, Model } from '../../types';
-import handleResponse from '../../utils/handleResponse';
-import { MediaTypeFilter, type MediaType } from '../drive/MediaTypeFilter';
-import { Tags } from '../drive/Tags';
+import styles from '@/styles/grid.module.scss';
+import { DBDataResponse, MergedData, Model } from '@/types';
+import handleResponse from '@/utils/handleResponse';
+import { MediaTypeFilter, type MediaType } from '@/components/drive/MediaTypeFilter';
+import { Tags } from '@/components/drive/Tags';
 
 interface DriveDbFiltersProps {
   driveData: DBDataResponse;

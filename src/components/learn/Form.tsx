@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { LearnFormProps } from '../../types/learn';
-import { Form } from '../Form';
+import { LearnFormProps } from '@/types/learn';
+import { Form } from '@/components/Form';
 
 export const LearnForm = ({ children, onSubmit, title }: LearnFormProps) => {
   const [array, setArray] = useState<number[] | string[]>([]);

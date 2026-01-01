@@ -3,9 +3,9 @@ import { format } from 'date-fns';
 import isNull from 'lodash/isNull';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import { DriveFileView } from '../../../src/components/FileEditor';
-import { getDuration, getImageLink } from '../../../src/utils';
-import handleResponse from '../../../src/utils/handleResponse';
+import { DriveFileView } from '@/components/FileEditor';
+import { getDuration, getImageLink } from '@/utils';
+import handleResponse from '@/utils/handleResponse';
 
 const getDriveFile = async (driveId: string) => {
   try {

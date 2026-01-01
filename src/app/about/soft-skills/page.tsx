@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Drawer } from '../../../src/components/Drawer';
+import { Drawer } from '@/components/Drawer';
 
 export const metadata: Metadata = {
   title: 'About Thomas Kim | Soft Skills | TK Premier'

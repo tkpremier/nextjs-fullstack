@@ -4,7 +4,7 @@ import omit from 'lodash/omit';
 import uniq from 'lodash/uniq';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
-import { DBData, DriveHandler, DriveResponse, Model } from '../types';
+import { DBData, DriveHandler, DriveResponse, Model } from '@/types';
 import { Form } from './Form';
 export const ModelForm = ({
   drive,

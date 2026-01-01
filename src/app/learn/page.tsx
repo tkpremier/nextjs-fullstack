@@ -6,9 +6,9 @@ import {
   bubbleSortCode,
   insertionSortCode,
   selectionSortCode
-} from '../../src/code-examples';
-import { Code } from '../../src/components/Code';
-import { Drawer } from '../../src/components/Drawer';
+} from '@/code-examples';
+import { Code } from '@/components/Code';
+import { Drawer } from '@/components/Drawer';
 import { MergeSortForm } from './MergeSortForm';
 
 export const metadata: Metadata = {

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { selectionSortCode, selectionSortStableCode } from '../../../../src/code-examples';
-import { Code } from '../../../../src/components/Code';
+import { selectionSortCode, selectionSortStableCode } from '@/code-examples';
+import { Code } from '@/components/Code';
 import { SelectionSortForm, SelectionSortStringForm } from './SelectionSortForm';
 
 export const metadata: Metadata = {

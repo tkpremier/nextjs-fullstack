@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { Drawer } from '../../../src/components/Drawer';
-import handleResponse from '../../../src/utils/handleResponse';
+import { Drawer } from '@/components/Drawer';
+import handleResponse from '@/utils/handleResponse';
 import { AddForm } from './AddForm';
 
 export const metadata: Metadata = {

@@ -3,7 +3,7 @@
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Bold, ClassicEditor, Essentials, Italic, Link, List, Paragraph } from 'ckeditor5';
 import 'react';
-import { EditorProps } from '../types';
+import { EditorProps } from '@/types';
 
 export const CKEditorComponent = (props: EditorProps) => {
   const editorConfig = {

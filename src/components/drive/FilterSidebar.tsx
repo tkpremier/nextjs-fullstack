@@ -1,8 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useFilterSidebar } from '../../hooks/filterSidebar';
-import styles from '../../styles/filterSidebar.module.scss';
+import { useFilterSidebar } from '@/hooks/filterSidebar';
+import styles from '@/styles/filterSidebar.module.scss';
 
 export const FilterSidebar = () => {
   const [mounted, setMounted] = useState(false);

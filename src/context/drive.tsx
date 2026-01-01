@@ -1,8 +1,8 @@
 'use client';
 import camelCase from 'lodash/camelCase';
 import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { DBData, DBDataResponse, DriveHandler, DriveResponse } from '../types';
-import handleResponse from '../utils/handleResponse';
+import { DBData, DBDataResponse, DriveHandler, DriveResponse } from '@/types';
+import handleResponse from '@/utils/handleResponse';
 
 export const DriveContext = createContext<[DriveResponse, DriveHandler<DriveResponse>]>([
   { data: [] } as DriveResponse,

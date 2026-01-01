@@ -1,10 +1,10 @@
 'use client';
 import serialize from 'form-serialize';
 import React, { useCallback, useState } from 'react';
-import { binaryRecursive } from '../../../src/code-examples';
-import { binaryRecursive as recursiveApproach } from '../../../src/code-examples/search/iterativeSearch';
-import { Code } from '../../../src/components/Code';
-import styles from '../../../src/styles/code.module.scss';
+import { binaryRecursive } from '@/code-examples';
+import { binaryRecursive as recursiveApproach } from '@/code-examples/search/iterativeSearch';
+import { Code } from '@/components/Code';
+import styles from '@/styles/code.module.scss';
 
 export default function Binary() {
   const [exampleArray, runAndSet] = useState<number[]>([]);

@@ -4,8 +4,8 @@ import { Form } from './Form';
 
 import serialize from 'form-serialize';
 import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
-import { DBDataResponse, DriveHandler, DriveResponse, GoogleDriveAPIResponse } from '../types';
-import handleResponse from '../utils/handleResponse';
+import { DBDataResponse, DriveHandler, DriveResponse, GoogleDriveAPIResponse } from '@/types';
+import handleResponse from '@/utils/handleResponse';
 
 const updateDriveFileApi = (
   driveId: string,

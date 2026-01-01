@@ -1,7 +1,7 @@
 'use client';
 import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { Model } from '../types';
-import handleResponse from '../utils/handleResponse';
+import { Model } from '@/types';
+import handleResponse from '@/utils/handleResponse';
 
 export const ModelContext = createContext<
   [Model[], (url: string, options?: RequestInit & { body?: Model }) => Promise<{ data: Model[] } | Error>]

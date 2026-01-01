@@ -1,15 +1,15 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, use, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { DriveDbFilters } from '../../src/components/drive-db/DriveDbFilters';
-import { DriveGrid } from '../../src/components/drive-db/DriveGrid';
-import { FilterSidebarContent } from '../../src/components/drive/FilterSidebarContent';
-import { MediaType } from '../../src/components/drive/MediaTypeFilter';
-import { DriveContext } from '../../src/context/drive';
-import { ModelContext } from '../../src/context/model';
-import { DBDataResponse, SortOptionKeys } from '../../src/types';
-import { parseModelsFromURL, parseTagsFromURL } from '../../src/utils/drive-db';
-import { extractHashtags } from '../../src/utils/hashTags';
+import { DriveDbFilters } from '@/components/drive-db/DriveDbFilters';
+import { DriveGrid } from '@/components/drive-db/DriveGrid';
+import { FilterSidebarContent } from '@/components/drive/FilterSidebarContent';
+import { MediaType } from '@/components/drive/MediaTypeFilter';
+import { DriveContext } from '@/context/drive';
+import { ModelContext } from '@/context/model';
+import { DBDataResponse, SortOptionKeys } from '@/types';
+import { parseModelsFromURL, parseTagsFromURL } from '@/utils/drive-db';
+import { extractHashtags } from '@/utils/hashTags';
 
 const DriveDb = () => {
   const router = useRouter();

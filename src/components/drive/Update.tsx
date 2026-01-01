@@ -1,7 +1,7 @@
 'use client';
 import { Editor as CKEditor } from 'ckeditor5';
-import { EditorProps, IEventInfo } from '../../types';
-import { Editor } from '../Editor';
+import { EditorProps, IEventInfo } from '@/types';
+import { Editor } from '@/components/Editor';
 
 export const HTMLEditor = (props: EditorProps) => {
   const handleChange = (eventInfo: IEventInfo, editor: CKEditor) => {

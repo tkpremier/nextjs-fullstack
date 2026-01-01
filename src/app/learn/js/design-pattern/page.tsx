@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { Code } from '../../../../src/components/Code';
+import { Code } from '@/components/Code';
 
 const privateMethods = `
 var myModule = (function() {

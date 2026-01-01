@@ -2,8 +2,8 @@
 import isNull from 'lodash/isNull';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getImageLink } from '../../utils';
-import { Slider } from '../Slider';
+import { getImageLink } from '@/utils';
+import { Slider } from '@/components/Slider';
 
 export const DriveDbSlider = ({
   data,

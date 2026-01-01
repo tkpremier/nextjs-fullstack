@@ -5,11 +5,11 @@ import serialize from 'form-serialize';
 import { FormEvent, useCallback, useContext, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Drawer } from '../../src/components/Drawer';
-import { Form } from '../../src/components/Form';
-import { HTMLEditor } from '../../src/components/drive/Update';
-import { InterviewContext } from '../../src/context/interview';
-import { Interview } from '../../src/types';
+import { Drawer } from '@/components/Drawer';
+import { Form } from '@/components/Form';
+import { HTMLEditor } from '@/components/drive/Update';
+import { InterviewContext } from '@/context/interview';
+import { Interview } from '@/types';
 
 const defaultProps = { id: 0, company: '', date: new Date(Date.now()), retro: '' } as Interview;
 

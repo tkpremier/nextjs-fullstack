@@ -1,4 +1,4 @@
-import { MediaType } from '../components/drive/MediaTypeFilter';
+import { MediaType } from '@/components/drive/MediaTypeFilter';
 
 /**
  * Parses comma-separated tags from URL parameter

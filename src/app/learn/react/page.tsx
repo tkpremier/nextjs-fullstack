@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import * as codeString from '../../../src/code-strings/react';
-import * as codeHooks from '../../../src/code-strings/react/hooks';
-import { Code } from '../../../src/components/Code';
-import { Drawer } from '../../../src/components/Drawer';
-import { Slider } from '../../../src/components/Slider';
+import * as codeString from '@/code-strings/react';
+import * as codeHooks from '@/code-strings/react/hooks';
+import { Code } from '@/components/Code';
+import { Drawer } from '@/components/Drawer';
+import { Slider } from '@/components/Slider';
 
 export const metadata: Metadata = {
   title: 'Learn React Guide | TK Premier'

@@ -1,8 +1,11 @@
 import Link from 'next/link';
-import { Slider } from '../src/components/Slider';
-import styles from '../src/styles/layout.module.scss';
+import { Slider } from '@/components/Slider';
+import { auth0 } from '@/lib/auth0';
+import styles from '@/styles/layout.module.scss';
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth0.getSession();
+  console.log(session);
   return (
     <>
       <div className={styles.iframeWrapper}>

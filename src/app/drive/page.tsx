@@ -5,16 +5,16 @@ import isNull from 'lodash/isNull';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
-import { Drawer } from '../../src/components/Drawer';
-import { DriveFileView } from '../../src/components/FileEditor';
-import { FilterSidebarContent } from '../../src/components/drive/FilterSidebarContent';
-import { MediaTypeFilter, type MediaType } from '../../src/components/drive/MediaTypeFilter';
-import { Tags } from '../../src/components/drive/Tags';
-import styles from '../../src/styles/grid.module.scss';
-import { DriveData, GoogleDriveAPIResponse, MergedData, SortOptionKeys } from '../../src/types';
-import { formatBytes, getDuration, getImageLink } from '../../src/utils';
-import handleResponse from '../../src/utils/handleResponse';
-import { extractHashtags } from '../../src/utils/hashTags';
+import { Drawer } from '@/components/Drawer';
+import { DriveFileView } from '@/components/FileEditor';
+import { FilterSidebarContent } from '@/components/drive/FilterSidebarContent';
+import { MediaTypeFilter, type MediaType } from '@/components/drive/MediaTypeFilter';
+import { Tags } from '@/components/drive/Tags';
+import styles from '@/styles/grid.module.scss';
+import { DriveData, GoogleDriveAPIResponse, MergedData, SortOptionKeys } from '@/types';
+import { formatBytes, getDuration, getImageLink } from '@/utils';
+import handleResponse from '@/utils/handleResponse';
+import { extractHashtags } from '@/utils/hashTags';
 
 const getDriveFromApi = async () => {
   try {

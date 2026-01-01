@@ -1,10 +1,9 @@
+import { Header } from '@/components/Header';
+import '@/styles/global.scss';
+import layoutStyles from '@/styles/layout.module.scss';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import React, { PropsWithChildren, Suspense } from 'react';
-import { Header } from '../components/Header';
-import { UserProvider } from '../context/user';
-import '../styles/global.scss';
-import layoutStyles from '../styles/layout.module.scss';
+import { PropsWithChildren, Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'TK Premier',
@@ -14,25 +13,23 @@ export const metadata: Metadata = {
 const Layout = ({ children }: PropsWithChildren<{}>) => (
   <html>
     <body>
-      <UserProvider>
-        <div className={layoutStyles.mainRoot}>
-          <Suspense fallback={<header>Loading...</header>}>
-            <Header />
-          </Suspense>
-          {children}
-          <footer>
-            <Link href="/about" key="about">
-              About
-            </Link>
-            <Link href="/learn" key="learn">
-              Learn
-            </Link>
-            <Link href="/interview" key="interview">
-              Interviews
-            </Link>
-          </footer>
-        </div>
-      </UserProvider>
+      <div className={layoutStyles.mainRoot}>
+        <Suspense fallback={<header>Loading...</header>}>
+          <Header />
+        </Suspense>
+        {children}
+        <footer>
+          <Link href="/about" key="about">
+            About
+          </Link>
+          <Link href="/learn" key="learn">
+            Learn
+          </Link>
+          <Link href="/interview" key="interview">
+            Interviews
+          </Link>
+        </footer>
+      </div>
     </body>
   </html>
 );

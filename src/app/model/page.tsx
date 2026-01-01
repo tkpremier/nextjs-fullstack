@@ -1,8 +1,8 @@
 'use client';
 import Link from 'next/link';
 import { use, useEffect } from 'react';
-import { ModelContext } from '../../src/context/model';
-import { Model } from '../../src/types';
+import { ModelContext } from '@/context/model';
+import { Model } from '@/types';
 const ModelPage = () => {
   const [models, setModels] = use(ModelContext);
   useEffect(() => {

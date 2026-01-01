@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import { MergedData } from '../../types';
-import { extractHashtags } from '../../utils/hashTags';
+import { MergedData } from '@/types';
+import { extractHashtags } from '@/utils/hashTags';
 
 const isDateHashtag = (tag: string): boolean => {
   // Check if it's an 8-digit hashtag (MMDDYYYY format)

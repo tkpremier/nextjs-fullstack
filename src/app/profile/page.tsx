@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense, useContext, useMemo } from 'react';
-import { UserContext } from '../../src/context/user';
+import { UserContext } from '@/context/user';
 
 export const UnauthenticatedFallback = ({ loginUrl = '/' }: { loginUrl: string }) => (
   <h1>

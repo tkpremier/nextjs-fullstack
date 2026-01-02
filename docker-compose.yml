@@ -44,6 +44,7 @@ services:
     env_file: []
     environment:
       PORT: ${CLIENT_PORT}
+      NEXT_PUBLIC_ADMIN_EMAILS: ${ADMIN_EMAILS}
     dns:
       - 8.8.8.8
       - 8.8.4.4

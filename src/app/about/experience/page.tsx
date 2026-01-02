@@ -1,6 +1,6 @@
-import { Metadata } from 'next';
 import { Drawer } from '@/components/Drawer';
-import handleResponse from '@/utils/handleResponse';
+import { getExp } from '@/services/db';
+import { Metadata } from 'next';
 import { AddForm } from './AddForm';
 
 export const metadata: Metadata = {
@@ -9,19 +9,19 @@ export const metadata: Metadata = {
 };
 export const dynamic = 'force-dynamic';
 
-const getExp = async () => {
-  try {
-    const url = `${process.env.INTERNAL_API_URL}/api/experience`;
-    const response = await handleResponse(await fetch(url));
-    return response;
-  } catch (error) {
-    console.error('Experience error: ', error);
-    return { data: [] };
-  }
-};
+// const getExp = async () => {
+//   try {
+//     const url = `${process.env.APP_BASE_URL}/api/experience`;
+//     const response = await handleResponse(await fetch(url));
+//     return response;
+//   } catch (error) {
+//     console.error('Experience error: ', error);
+//     return { data: [] };
+//   }
+// };
 
-export default async function Experience(props) {
-  const data = await getExp();
+export default async function Experience() {
+  const { data } = await getExp();
   return (
     <>
       <h1 className="title">My Experience &#x1F305;</h1>
@@ -35,9 +35,9 @@ export default async function Experience(props) {
           </ul>
         </figure>
       </blockquote>
-      {Array.isArray(data.data) ? (
+      {data.length > 0 ? (
         <ul className="root" style={{ maxWidth: '100%' }}>
-          {data.data.map(e => (
+          {data.map(e => (
             <Drawer closed header={e.name} key={e.id}>
               <div dangerouslySetInnerHTML={{ __html: e.description }} />
             </Drawer>

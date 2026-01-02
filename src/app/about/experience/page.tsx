@@ -9,17 +9,6 @@ export const metadata: Metadata = {
 };
 export const dynamic = 'force-dynamic';
 
-// const getExp = async () => {
-//   try {
-//     const url = `${process.env.APP_BASE_URL}/api/experience`;
-//     const response = await handleResponse(await fetch(url));
-//     return response;
-//   } catch (error) {
-//     console.error('Experience error: ', error);
-//     return { data: [] };
-//   }
-// };
-
 export default async function Experience() {
   const { data } = await getExp();
   return (

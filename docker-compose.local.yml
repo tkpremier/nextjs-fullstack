@@ -34,6 +34,7 @@ services:
     # override API URL for local dev (if you’re not using nginx/local domains)
     environment:
       NODE_ENV: development
+      NEXT_PUBLIC_APP_BASE_URL: http://localhost:${CLIENT_PORT}
     volumes:
       - .:/app
       - /app/node_modules # Preserve node_modules from image

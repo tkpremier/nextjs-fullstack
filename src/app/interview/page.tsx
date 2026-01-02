@@ -1,3 +1,4 @@
+import { getInterview } from '@/services/db';
 import { Metadata } from 'next';
 import { Interviews } from './Drawers';
 
@@ -9,5 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async () => {
-  return <Interviews />;
+  const { data } = await getInterview();
+  return <Interviews interviews={data} />;
 };

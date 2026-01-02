@@ -1,15 +1,15 @@
 'use client';
 
+import { Drawer } from '@/components/Drawer';
+import { HTMLEditor } from '@/components/drive/Update';
+import { Form } from '@/components/Form';
+import { Interview } from '@/types';
+import handleResponse from '@/utils/handleResponse';
 import { Editor as CKEditor } from 'ckeditor5';
 import serialize from 'form-serialize';
-import { FormEvent, useCallback, useContext, useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Drawer } from '@/components/Drawer';
-import { Form } from '@/components/Form';
-import { HTMLEditor } from '@/components/drive/Update';
-import { InterviewContext } from '@/context/interview';
-import { Interview } from '@/types';
 
 const defaultProps = { id: 0, company: '', date: new Date(Date.now()), retro: '' } as Interview;
 
@@ -24,8 +24,8 @@ const InterviewItem = (props: Interview) => {
   );
 };
 
-export const Interviews = () => {
-  const [interviews, handleInterviews] = useContext(InterviewContext);
+export const Interviews = ({ interviews }: { interviews: Interview[] }) => {
+  // const [interviews, handleInterviews] = useContext(InterviewContext);
   const [updatedInt, updateInt] = useState<Interview>(defaultProps);
 
   const handleDateChange = (date: Date) => {
@@ -54,18 +54,17 @@ export const Interviews = () => {
         },
         body: JSON.stringify(interview)
       };
-      const response = await handleInterviews(
-        `${process.env.NEXT_PUBLIC_CLIENTURL}/api/interview`,
-        options as unknown as RequestInit & { body?: Interview }
+      const response = await handleResponse(
+        await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/interview`, options)
       );
       if (response instanceof Error) {
         console.error('handleSubmit error: ', response);
         return;
       }
-      const updatedInterview = response.data[0] as Interview;
+      const updatedInterview = response.data as Interview;
       updateInt(updatedInterview);
     },
-    [updatedInt, handleInterviews]
+    [updatedInt]
   );
   const handleUpdate = (e: React.PointerEvent<HTMLButtonElement>) => {
     const id = parseInt(e.currentTarget.value, 10);
@@ -81,7 +80,7 @@ export const Interviews = () => {
     <>
       <ul className="root">
         {interviews.map((i: Interview) => (
-          <Drawer key={i.id} header={`${i.company} - ${new Date(i.date).toLocaleDateString()}`} closed>
+          <Drawer key={i.id} header={`${i.company}`} closed>
             <InterviewItem key={i.id} {...i} onClick={handleUpdate} />
           </Drawer>
         ))}

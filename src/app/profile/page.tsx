@@ -1,14 +1,8 @@
 'use client';
-import Link from 'next/link';
+import { UnauthenticatedFallback } from '@/components/UnauthenticatedFallback';
+import { UserContext } from '@/context/user';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Suspense, useContext, useMemo } from 'react';
-import { UserContext } from '@/context/user';
-
-export const UnauthenticatedFallback = ({ loginUrl = '/' }: { loginUrl: string }) => (
-  <h1>
-    <Link href={loginUrl}>Please login</Link>
-  </h1>
-);
 
 const Profile = () => {
   const [user] = useContext(UserContext);
@@ -17,7 +11,7 @@ const Profile = () => {
 
   const loginUrl = useMemo(() => {
     const currentUrl = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-    return `${process.env.NEXT_PUBLIC_CLIENTURL}/login${
+    return `${process.env.NEXT_PUBLIC_APP_BASE_URL}/login${
       currentUrl ? `?returnTo=${encodeURIComponent(currentUrl)}` : ''
     }`;
   }, [pathname, searchParams]);

@@ -1,10 +1,10 @@
 'use client';
+import { DBData, DriveHandler, DriveResponse, Model } from '@/types';
 import serialize from 'form-serialize';
 import omit from 'lodash/omit';
 import uniq from 'lodash/uniq';
 import Link from 'next/link';
 import { useCallback, useState } from 'react';
-import { DBData, DriveHandler, DriveResponse, Model } from '@/types';
 import { Form } from './Form';
 export const ModelForm = ({
   drive,
@@ -54,7 +54,7 @@ export const ModelForm = ({
     // updateDrive(modelId, data.driveId as string);
 
     handleModels(
-      `${process.env.NEXT_PUBLIC_CLIENTURL}/api/model${options.method === 'POST' ? '' : `/${modelId}`}`,
+      `${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/model${options.method === 'POST' ? '' : `/${modelId}`}`,
       options as unknown as RequestInit & { body?: Model | undefined }
     )
       .then(res => {
@@ -84,7 +84,7 @@ export const ModelForm = ({
         })
       };
 
-      handleDrive(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/drive-list/${driveId}`, options)
+      handleDrive(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-list/${driveId}`, options)
         .then(res => {
           console.log('data.driveId: ', driveId);
           console.log('drive.id: ', drive.id);

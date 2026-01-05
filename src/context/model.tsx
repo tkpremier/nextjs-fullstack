@@ -1,7 +1,7 @@
 'use client';
-import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react';
-import { Model } from '@/types';
+import { Model } from '@/types/db/model';
 import handleResponse from '@/utils/handleResponse';
+import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 export const ModelContext = createContext<
   [Model[], (url: string, options?: RequestInit & { body?: Model }) => Promise<{ data: Model[] } | Error>]
@@ -40,7 +40,7 @@ export const ModelProvider = ({ children }: PropsWithChildren<{}>) => {
     [setModels]
   );
   useEffect(() => {
-    handleModels(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/model`);
+    handleModels(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/model`);
   }, []);
   return <ModelContext.Provider value={[models, handleModels]}>{children}</ModelContext.Provider>;
 };

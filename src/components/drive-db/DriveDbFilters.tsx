@@ -1,10 +1,10 @@
 'use client';
-import { useCallback } from 'react';
+import { MediaTypeFilter, type MediaType } from '@/components/drive/MediaTypeFilter';
+import { Tags } from '@/components/drive/Tags';
 import styles from '@/styles/grid.module.scss';
 import { DBDataResponse, MergedData, Model } from '@/types';
 import handleResponse from '@/utils/handleResponse';
-import { MediaTypeFilter, type MediaType } from '@/components/drive/MediaTypeFilter';
-import { Tags } from '@/components/drive/Tags';
+import { useCallback } from 'react';
 
 interface DriveDbFiltersProps {
   driveData: DBDataResponse;
@@ -34,13 +34,13 @@ export const DriveDbFilters = ({
   handleDrive
 }: DriveDbFiltersProps) => {
   const handleSyncDrive = useCallback(async () => {
-    const response = await handleResponse(await fetch(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/drive-google-sync`));
+    const response = await handleResponse(await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google-sync`));
     if (response instanceof Error) {
       console.error('error: ', response);
     } else {
       if (response.processed > 0 && response.errors === 0) {
         console.log('response: ', response);
-        handleDrive(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/drive-list`);
+        handleDrive(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-list`);
       }
     }
   }, [handleDrive]);

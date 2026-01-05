@@ -1,8 +1,8 @@
 'use client';
 
-import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 import { Interview } from '@/types';
 import handleResponse from '@/utils/handleResponse';
+import { createContext, useCallback, useEffect, useMemo, useState } from 'react';
 
 export const InterviewContext = createContext<
   [Interview[], (url: string, options?: RequestInit & { body?: Interview }) => Promise<{ data: Interview[] } | Error>]
@@ -40,7 +40,7 @@ export const InterviewProvider = ({ children }) => {
     [setInterviews]
   );
   useEffect(() => {
-    handleInterviews(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/interview`);
+    handleInterviews(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/interview`);
   }, []);
   const data = useMemo(
     () =>

@@ -1,23 +1,9 @@
 import { DriveDbSlider } from '@/components/model/Slider';
-import handleResponse from '@/utils/handleResponse';
+import { getModel } from '@/services/db/model';
 
-const getModel = async (id: string) => {
-  try {
-    const response = await handleResponse(
-      await fetch(`${process.env.INTERNAL_API_URL}/api/model/${id}`, { credentials: 'include' })
-    );
-    if (response instanceof Error) {
-      throw response;
-    }
-    return response;
-  } catch (error) {
-    console.error('Model error: ', error);
-    return { data: null };
-  }
-};
 const ModelPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const { data } = await getModel(id);
+  const { data } = await getModel(Number(id));
   const model = data[0];
   const images = model.driveFiles.filter(file => file.type === 'image');
   const videos = model.driveFiles.filter(file => file.type === 'video');

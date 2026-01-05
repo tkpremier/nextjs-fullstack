@@ -1,16 +1,16 @@
+import { DriveFileView } from '@/components/FileEditor';
+import { getDuration, getImageLink } from '@/utils';
+import handleResponse from '@/utils/handleResponse';
 import { TZDate } from '@date-fns/tz';
 import { format } from 'date-fns';
 import isNull from 'lodash/isNull';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import { DriveFileView } from '@/components/FileEditor';
-import { getDuration, getImageLink } from '@/utils';
-import handleResponse from '@/utils/handleResponse';
 
 const getDriveFile = async (driveId: string) => {
   try {
     const response = await handleResponse(
-      await fetch(`${process.env.INTERNAL_API_URL}/api/drive-file/${driveId}`, { credentials: 'include' })
+      await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google/${driveId}`, { credentials: 'include' })
     );
     return response;
   } catch (error) {

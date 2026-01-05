@@ -1,4 +1,4 @@
-import { createInterview, updateInterview } from '@/services/db';
+import { createInterview, updateInterview } from '@/services/db/interview';
 import { NextResponse } from 'next/server';
 
 export async function PUT(request: Request) {

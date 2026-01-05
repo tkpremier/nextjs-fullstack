@@ -1,4 +1,4 @@
-import { getInterview } from '@/services/db';
+import { getInterview } from '@/services/db/interview';
 import { Metadata } from 'next';
 import { Interviews } from './Drawers';
 

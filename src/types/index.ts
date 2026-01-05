@@ -2,6 +2,7 @@ import { Editor as CKEditor } from 'ckeditor5';
 import { drive_v3 } from 'googleapis';
 import { NextApiRequest } from 'next';
 import React, { Dispatch, SetStateAction } from 'react';
+import { InterviewDB } from './db/interview';
 
 export type NextApiRequestWithQuery = NextApiRequest & {
   query?: {
@@ -107,17 +108,6 @@ export interface EditorProps {
   name: string;
   onChange?: (eventInfo: IEventInfo, editor: CKEditor) => void;
 }
-
-// Experience page types
-export interface Exp {
-  id: number;
-  name: string;
-  description: string;
-}
-
-export type AboutProps = {
-  data: Array<Exp>;
-};
 
 // Interpolation page types
 export interface ExtendedTarget extends EventTarget {
@@ -228,21 +218,16 @@ export interface DriveData {
   nextPageToken: string;
 }
 
-export type Interview = {
-  id: number;
-  company: string;
-  date: Date;
-  retro: string;
+export type Interview = InterviewDB & {
   onClick?: (event: React.PointerEvent<HTMLButtonElement>) => void;
 };
 
-export type Model = {
-  createdOn: string;
-  driveIds: Array<string>;
-  id: number;
-  name: string;
-  platform: string;
-};
+export type MediaType = 'all' | 'image' | 'video';
+
+export interface MediaTypeFilterProps {
+  selectedType: MediaType;
+  onTypeChange: (type: MediaType) => void;
+}
 
 export type User =
   | {

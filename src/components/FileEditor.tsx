@@ -2,10 +2,10 @@
 import isNull from 'lodash/isNull';
 import { Form } from './Form';
 
-import serialize from 'form-serialize';
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 import { DBDataResponse, DriveHandler, DriveResponse, GoogleDriveAPIResponse } from '@/types';
 import handleResponse from '@/utils/handleResponse';
+import serialize from 'form-serialize';
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 
 const updateDriveFileApi = (
   driveId: string,
@@ -20,7 +20,7 @@ const updateDriveFileApi = (
         reject(new Error('Drive ID is required'));
       }
       const response = await handleResponse(
-        await fetch(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/drive-file/${driveId}`, options)
+        await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google/${driveId}`, options)
       );
       if (response instanceof Error) {
         reject(response);
@@ -75,7 +75,7 @@ export const DriveFileView = ({
         return;
       }
       if (handleDrive) {
-        handleDrive(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/drive-list/${driveFile?.id}`, options)
+        handleDrive(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-list/${driveFile?.id}`, options)
           .then(res => {
             if (!(res instanceof Error)) {
               const body: Partial<GoogleDriveAPIResponse> = {

@@ -4,6 +4,7 @@ import { Drawer } from '@/components/Drawer';
 import { HTMLEditor } from '@/components/drive/Update';
 import { Form } from '@/components/Form';
 import { Interview } from '@/types';
+import { InterviewDB } from '@/types/db/interview';
 import handleResponse from '@/utils/handleResponse';
 import { Editor as CKEditor } from 'ckeditor5';
 import serialize from 'form-serialize';
@@ -11,22 +12,20 @@ import { FormEvent, useCallback, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const defaultProps = { id: 0, company: '', date: new Date(Date.now()), retro: '' } as Interview;
+const defaultProps = { id: 0, company: '', date: new Date(Date.now()), retro: '' } as InterviewDB;
 
-const InterviewItem = (props: Interview) => {
-  return (
-    <>
-      <div dangerouslySetInnerHTML={{ __html: props.retro }} />
-      <button aria-label={`Update ${props.company}`} onClick={props.onClick} value={props.id}>
-        Update {props.company}
-      </button>
-    </>
-  );
-};
+const InterviewItem = (props: Interview) => (
+  <>
+    <div dangerouslySetInnerHTML={{ __html: props.retro }} />
+    <button aria-label={`Update ${props.company}`} onClick={props.onClick} value={props.id}>
+      Update {props.company}
+    </button>
+  </>
+);
 
-export const Interviews = ({ interviews }: { interviews: Interview[] }) => {
+export const Interviews = ({ interviews }: { interviews: InterviewDB[] }) => {
   // const [interviews, handleInterviews] = useContext(InterviewContext);
-  const [updatedInt, updateInt] = useState<Interview>(defaultProps);
+  const [updatedInt, updateInt] = useState<InterviewDB>(defaultProps);
 
   const handleDateChange = (date: Date) => {
     // console.log('date: ', typeof date);
@@ -61,7 +60,7 @@ export const Interviews = ({ interviews }: { interviews: Interview[] }) => {
         console.error('handleSubmit error: ', response);
         return;
       }
-      const updatedInterview = response.data as Interview;
+      const updatedInterview = response.data as InterviewDB;
       updateInt(updatedInterview);
     },
     [updatedInt]
@@ -79,7 +78,7 @@ export const Interviews = ({ interviews }: { interviews: Interview[] }) => {
   return (
     <>
       <ul className="root">
-        {interviews.map((i: Interview) => (
+        {interviews.map((i: InterviewDB) => (
           <Drawer key={i.id} header={`${i.company}`} closed>
             <InterviewItem key={i.id} {...i} onClick={handleUpdate} />
           </Drawer>

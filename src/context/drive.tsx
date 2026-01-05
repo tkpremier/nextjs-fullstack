@@ -1,8 +1,8 @@
 'use client';
-import camelCase from 'lodash/camelCase';
-import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { DBData, DBDataResponse, DriveHandler, DriveResponse } from '@/types';
 import handleResponse from '@/utils/handleResponse';
+import camelCase from 'lodash/camelCase';
+import { createContext, PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 export const DriveContext = createContext<[DriveResponse, DriveHandler<DriveResponse>]>([
   { data: [] } as DriveResponse,
@@ -39,6 +39,7 @@ export const DriveProvider = ({ children, source }: PropsWithChildren<{ source: 
             resolve({ data: [updatedDrive] } as { data: DBData[] } | Error);
             return;
           }
+          console.log('drive api response: ', response);
           setDrive({ data: response.data });
           resolve({ data: response.data });
         } catch (error) {
@@ -51,8 +52,8 @@ export const DriveProvider = ({ children, source }: PropsWithChildren<{ source: 
   useEffect(() => {
     getDrive(
       source === 'drive-db'
-        ? `${process.env.NEXT_PUBLIC_CLIENTURL}/api/drive-list`
-        : `${process.env.NEXT_PUBLIC_CLIENTURL}/api/drive-google`
+        ? `${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-list`
+        : `${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google`
     );
   }, []);
   return <DriveContext.Provider value={[drive, getDrive]}>{children}</DriveContext.Provider>;

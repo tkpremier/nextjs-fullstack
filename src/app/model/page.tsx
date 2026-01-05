@@ -1,13 +1,9 @@
-'use client';
+import { getAllModels } from '@/services/db/model';
+import { Model } from '@/types/db/model';
 import Link from 'next/link';
-import { use, useEffect } from 'react';
-import { ModelContext } from '@/context/model';
-import { Model } from '@/types';
-const ModelPage = () => {
-  const [models, setModels] = use(ModelContext);
-  useEffect(() => {
-    setModels(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/model`);
-  }, []);
+
+export default async () => {
+  const { data: models } = await getAllModels();
   return (
     <div>
       <h1>Models</h1>
@@ -21,5 +17,3 @@ const ModelPage = () => {
     </div>
   );
 };
-
-export default ModelPage;

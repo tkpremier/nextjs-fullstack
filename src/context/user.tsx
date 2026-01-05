@@ -1,7 +1,7 @@
 'use client';
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useEffect, useState } from 'react';
 import { User } from '@/types';
 import handleResponse from '@/utils/handleResponse';
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useEffect, useState } from 'react';
 
 export const UserContext = createContext<[User, Dispatch<SetStateAction<User>>]>([undefined, () => {}]);
 
@@ -11,7 +11,7 @@ export const UserProvider = ({ children }: PropsWithChildren<{}>) => {
   useEffect(() => {
     const checkUser = async () => {
       const response = await handleResponse(
-        await fetch(`${process.env.NEXT_PUBLIC_CLIENTURL}/api/authentication`, {
+        await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/authentication`, {
           credentials: 'include'
         })
       );

@@ -1,5 +1,5 @@
 import { Drawer } from '@/components/Drawer';
-import { getExp } from '@/services/db';
+import { getExp } from '@/services/db/experience';
 import { Metadata } from 'next';
 import { AddForm } from './AddForm';
 

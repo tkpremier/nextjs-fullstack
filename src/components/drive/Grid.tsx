@@ -192,7 +192,8 @@ export const Grid = ({ files, nextPageToken }: { files: MergedData[]; nextPageTo
                       title={`${drive.name}`}
                       alt={`${drive.name} - Thumbnail`}
                       fill={true}
-                      objectFit="cover"
+                      sizes="(max-width: 479px) 100vw, (max-width: 768px) 50vw, 25vw"
+                      style={{ objectFit: 'cover' }}
                       placeholder="blur"
                       blurDataURL="/images/video_placeholder_165x103.svg"
                     />
@@ -203,7 +204,8 @@ export const Grid = ({ files, nextPageToken }: { files: MergedData[]; nextPageTo
                       src="/images/video_placeholder_165x103.svg"
                       alt={`${drive.name} - Placeholder`}
                       fill={true}
-                      objectFit="cover"
+                      sizes="(max-width: 479px) 100vw, (max-width: 768px) 50vw, 25vw"
+                      style={{ objectFit: 'cover' }}
                     />
                   </div>
                 )}

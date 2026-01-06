@@ -7,7 +7,7 @@ const handleResponse = async (response: Awaited<Promise<Response>>) => {
     return data;
   } catch (e) {
     console.error('e: ', e);
-    return e;
+    throw Error(e);
   }
 };
 

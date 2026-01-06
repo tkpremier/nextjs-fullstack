@@ -1,12 +1,19 @@
 import { Grid } from '@/components/drive/Grid';
+import { auth0 } from '@/lib/auth0';
 import { GoogleDriveAPIResponse, MergedData } from '@/types';
 import handleResponse from '@/utils/handleResponse';
 import { format } from 'date-fns';
+import { cookies } from 'next/headers';
 
 const getDriveFromApi = async () => {
   try {
+    const cookieStore = await cookies();
+    const cookieHeader = cookieStore.toString();
     const response = await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google`, {
-      credentials: 'include'
+      credentials: 'include',
+      headers: {
+        Cookie: cookieHeader
+      }
     });
     const data: Awaited<{ files: Array<GoogleDriveAPIResponse>; nextPageToken: string }> = await handleResponse(
       response
@@ -28,12 +35,12 @@ const getDriveFromApi = async () => {
       nextPageToken: data.nextPageToken
     };
   } catch (error) {
-    console.error('error: ', error);
     return { files: [], nextPageToken: '' };
   }
 };
 
 const Drive = async () => {
+  const session = await auth0.getSession();
   const driveData = await getDriveFromApi();
 
   return (

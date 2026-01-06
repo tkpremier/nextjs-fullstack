@@ -10,7 +10,7 @@ export const ModelContext = createContext<
 export const ModelProvider = ({ children }: PropsWithChildren<{}>) => {
   const [models, setModels] = useState<Model[]>([]);
   const handleModels = useCallback(
-    (url: string, options: RequestInit & { body?: Model } = { method: 'GET', credentials: 'include' }) => {
+    (url: string, options: RequestInit & { body?: Model } = { method: 'GET' }) => {
       return new Promise<{ data: Model[] } | Error>(async (resolve, reject) => {
         try {
           const response = await handleResponse(await fetch(url, options));

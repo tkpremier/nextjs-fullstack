@@ -43,3 +43,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# sql
+*.sql
+*.sql.gz
+*.sql.bz2
+*.sql.xz
+*.sql.tar
+*.sql.tar.gz
+*.sql.tar.bz2
+*.sql.tar.xz

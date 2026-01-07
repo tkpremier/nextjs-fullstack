@@ -1,4 +1,5 @@
 import { Grid } from '@/components/drive/Grid';
+import { auth0 } from '@/lib/auth0';
 import { GoogleDriveAPIResponse, MergedData } from '@/types';
 import handleResponse from '@/utils/handleResponse';
 import { format } from 'date-fns';
@@ -34,6 +35,8 @@ const getDriveFromApi = async () => {
 };
 
 const Drive = async () => {
+  const session = await auth0.getSession();
+  console.log('drive page session: ', session);
   const driveData = await getDriveFromApi();
 
   return (

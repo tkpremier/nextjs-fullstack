@@ -1,6 +1,7 @@
 ---
 description: Docker Project context, set up with Docker compose files, database, TypeScript api application, TypeScript client application
-globs: [**/*]
+globs:
+  - '**/*'
 alwaysApply: true
 ---
 

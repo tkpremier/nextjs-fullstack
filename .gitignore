@@ -11,11 +11,7 @@
 db-data/
 
 # next.js
-/.next/
-/out/
-
-# production
-/build
+/.next
 
 # misc
 .DS_Store

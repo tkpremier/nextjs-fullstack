@@ -1,5 +1,5 @@
-data-dump.sql
-full-data-dump.sql
+**/*.sql
+**/.next
 **/node_modules
 **/build
 **/dist

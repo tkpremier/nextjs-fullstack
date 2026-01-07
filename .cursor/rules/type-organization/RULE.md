@@ -1,8 +1,8 @@
 ---
 description: Type creation and organization
 alwaysApply: true
-globs: [**/*.ts]
-alwaysApply: true
+globs:
+  - "**/*.ts"
 ---
 
 ## Type Organization

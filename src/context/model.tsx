@@ -40,7 +40,7 @@ export const ModelProvider = ({ children }: PropsWithChildren<{}>) => {
     [setModels]
   );
   useEffect(() => {
-    handleModels(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/model`);
+    // getAllModels().then(res => setModels(res.data));
   }, []);
   return <ModelContext.Provider value={[models, handleModels]}>{children}</ModelContext.Provider>;
 };

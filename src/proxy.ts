@@ -1,9 +1,9 @@
 import { auth0 } from '@/lib/auth0';
 import type { NextRequest } from 'next/server';
 
-export async function proxy(request: NextRequest) {
+export const proxy = async (request: NextRequest) => {
   return await auth0.middleware(request);
-}
+};
 
 export const config = {
   matcher: [
@@ -13,6 +13,7 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'
+    '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+    '/api/:path*'
   ]
 };

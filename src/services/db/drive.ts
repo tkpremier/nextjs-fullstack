@@ -1,5 +1,5 @@
 import dbQuery from '@/_db/dev/dbQuery';
-import { DriveDB, DriveInsertValue, DriveUpdatePayload, ODriveFile } from '@/types/db/drive';
+import { DriveDB, DriveInsertValue, DriveUpdatePayload } from '@/types/db/drive';
 import { SyncStats } from '@/types/drive';
 import { DbResponse } from '@/types/util';
 import { camelCaseObjectWithDates, getExistingDriveIdentifiers, normalizeColumnName } from '@/utils/db';
@@ -38,7 +38,7 @@ export const getDrive = async (id?: string) => {
   drive ORDER BY created_time DESC`;
   const values = id ? [id] : [];
   try {
-    const { rows: data } = (await dbQuery.query(getDriveFileQuery, values)) as DbResponse;
+    const { rows: data } = await dbQuery.query(getDriveFileQuery, values);
     if (data[0] === undefined) {
       console.log('There are no drive files');
       return { data: [] };
@@ -49,10 +49,11 @@ export const getDrive = async (id?: string) => {
     return {
       data: data.map((f: DriveDB) =>
         camelCaseObjectWithDates(f, ['createdOn', 'createdTime', 'lastViewed'])
-      ) as Array<ODriveFile>
+      ) as Array<DriveDB>
     };
   } catch (error) {
-    return new Error(error);
+    console.error('Error getting drive files from database', error);
+    return { data: [] };
   }
 };
 
@@ -60,7 +61,7 @@ export const deleteDrive = async (id: string) => {
   const deleteDriveFileQuery = `DELETE FROM drive WHERE id = $1 RETURNING *`;
   const values = [id];
   try {
-    const { rows: data } = (await dbQuery.query(deleteDriveFileQuery, values)) as DbResponse;
+    const { rows: data } = await dbQuery.query(deleteDriveFileQuery, values);
     if (data[0] === undefined) {
       console.log('Drive file not found');
       return { data: [] };
@@ -88,7 +89,7 @@ export const deleteDrive = async (id: string) => {
     return {
       data: data.map((f: DriveDB) =>
         camelCaseObjectWithDates(f, ['createdOn', 'createdTime', 'lastViewed'])
-      ) as Array<ODriveFile>
+      ) as Array<DriveDB>
     };
   } catch (error) {
     return new Error(error);

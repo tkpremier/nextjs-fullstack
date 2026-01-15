@@ -1,12 +1,9 @@
-import { PropsWithChildren } from 'react';
 import { FilterSidebarProviderWrapper } from '@/components/drive/FilterSidebarProviderWrapper';
-import { DriveProvider } from '@/context/drive';
 import { ModelProvider } from '@/context/model';
+import { PropsWithChildren } from 'react';
 
 export default ({ children }: PropsWithChildren<{}>) => (
   <FilterSidebarProviderWrapper>
-    <DriveProvider source="drive-db">
-      <ModelProvider>{children}</ModelProvider>
-    </DriveProvider>
+    <ModelProvider>{children}</ModelProvider>
   </FilterSidebarProviderWrapper>
 );

@@ -1,8 +1,9 @@
 'use client';
-import { MediaTypeFilter, type MediaType } from '@/components/drive/MediaTypeFilter';
+import { MediaTypeFilter } from '@/components/drive/MediaTypeFilter';
 import { Tags } from '@/components/drive/Tags';
 import styles from '@/styles/grid.module.scss';
-import { DBDataResponse, MergedData, Model } from '@/types';
+import { DBDataResponse, MediaType, MergedData } from '@/types';
+import { Model } from '@/types/db/model';
 import handleResponse from '@/utils/handleResponse';
 import { useCallback } from 'react';
 
@@ -34,7 +35,7 @@ export const DriveDbFilters = ({
   handleDrive
 }: DriveDbFiltersProps) => {
   const handleSyncDrive = useCallback(async () => {
-    const response = await handleResponse(await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google-sync`));
+    const response = await handleResponse(await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google/sync`));
     if (response instanceof Error) {
       console.error('error: ', response);
     } else {
@@ -73,7 +74,7 @@ export const DriveDbFilters = ({
         </select>
       </div>
       <Tags
-        files={(driveData as DBDataResponse).data as unknown as MergedData[]}
+        files={driveData as DBDataResponse as unknown as MergedData[]}
         selectedHashtags={selectedHashtags}
         toggleHashtag={handleHashtagClick}
       />

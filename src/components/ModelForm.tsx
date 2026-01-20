@@ -1,5 +1,6 @@
 'use client';
-import { DBData, DriveHandler, DriveResponse, Model } from '@/types';
+import { DBData, DriveHandler, DriveResponse } from '@/types';
+import { Model } from '@/types/db/model';
 import serialize from 'form-serialize';
 import omit from 'lodash/omit';
 import uniq from 'lodash/uniq';

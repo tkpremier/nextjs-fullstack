@@ -1,12 +1,13 @@
 'use client';
+import { DriveFileView } from '@/components/FileEditor';
+import { ModelForm } from '@/components/ModelForm';
+import styles from '@/styles/grid.module.scss';
+import { DBData, DriveHandler, DriveResponse, MergedData } from '@/types';
+import { Model } from '@/types/db/model';
+import { formatBytes, getDuration, getImageLink } from '@/utils';
 import isNull from 'lodash/isNull';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from '@/styles/grid.module.scss';
-import { DBData, DriveHandler, DriveResponse, MergedData, Model } from '@/types';
-import { formatBytes, getDuration, getImageLink } from '@/utils';
-import { DriveFileView } from '@/components/FileEditor';
-import { ModelForm } from '@/components/ModelForm';
 
 interface GridCellProps {
   drive: DBData;

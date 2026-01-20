@@ -1,7 +1,6 @@
-import { Drawer } from '@/components/Drawer';
 import { getExp } from '@/services/db/experience';
 import { Metadata } from 'next';
-import { AddForm } from './AddForm';
+import { Experiences } from './AddForm';
 
 export const metadata: Metadata = {
   title: 'Experience | TK Premier',
@@ -11,10 +10,11 @@ export const dynamic = 'force-dynamic';
 
 export default async function Experience() {
   const { data } = await getExp();
+
   return (
     <>
-      <h1 className="title">My Experience &#x1F305;</h1>
-      <blockquote className="description">
+          <h1 className="title">My Experience &#x1F305;</h1>
+      {/* <blockquote className="description">
         <figure>
           Tell me about your journey into tech.
           <ul>
@@ -23,17 +23,8 @@ export default async function Experience() {
             <li>How is that applicable to our role or company goals?</li>
           </ul>
         </figure>
-      </blockquote>
-      {data.length > 0 ? (
-        <ul className="root" style={{ maxWidth: '100%' }}>
-          {data.map(e => (
-            <Drawer closed header={e.name} key={e.id}>
-              <div dangerouslySetInnerHTML={{ __html: e.description }} />
-            </Drawer>
-          ))}
-        </ul>
-      ) : null}
-      <AddForm />
+      </blockquote> */}
+      <Experiences data={data} />
     </>
   );
 }

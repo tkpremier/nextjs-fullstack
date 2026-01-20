@@ -13,25 +13,23 @@ const updateDriveFileApi = (
     method: 'PATCH',
     credentials: 'include'
   } as RequestInit & { body?: Partial<GoogleDriveAPIResponse> }
-) => {
-  return new Promise<{ data: GoogleDriveAPIResponse } | Error>(async (resolve, reject) => {
-    try {
-      if (!driveId) {
-        reject(new Error('Drive ID is required'));
-      }
-      const response = await handleResponse(
-        await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google/${driveId}`, options)
-      );
-      if (response instanceof Error) {
-        reject(response);
-      } else {
-        resolve({ data: response as GoogleDriveAPIResponse });
-      }
-    } catch (error) {
-      reject(error);
+) => new Promise<{ data: GoogleDriveAPIResponse } | Error>(async (resolve, reject) => {
+  try {
+    if (!driveId) {
+      reject(new Error('Drive ID is required'));
     }
-  });
-};
+    const response = await handleResponse(
+      await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google/${driveId}`, options)
+    );
+    if (response instanceof Error) {
+      reject(response);
+    } else {
+      resolve({ data: response as GoogleDriveAPIResponse });
+    }
+  } catch (error) {
+    reject(error);
+  }
+});
 
 export const DriveFileView = ({
   source = 'drive-google',

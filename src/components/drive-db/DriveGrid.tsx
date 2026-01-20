@@ -1,8 +1,9 @@
 'use client';
+import utilsStyles from '@/styles/utils.module.scss';
+import { DBData, DriveHandler, DriveResponse } from '@/types';
+import { Model } from '@/types/db/model';
 import { useEffect, useState } from 'react';
 import { experimental_VGrid as VGrid } from 'virtua';
-import utilsStyles from '@/styles/utils.module.scss';
-import { DBData, DriveHandler, DriveResponse, Model } from '@/types';
 import { GridCell } from './GridCell';
 
 // Helper function to get column count based on window width

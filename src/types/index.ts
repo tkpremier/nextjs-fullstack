@@ -97,8 +97,8 @@ export interface IFormProps {
 // Editor types
 export interface IEventInfo {
   name: string;
-  path: Array<any>;
-  source: any;
+  path: Array<unknown>;
+  source: unknown;
 }
 
 export interface EditorProps {
@@ -125,7 +125,7 @@ export type FormValue = {
 
 // DB service types
 export type DbResponse = {
-  rows: Array<any>;
+  rows: Array<unknown>;
 };
 
 export type ErrorResponse = {
@@ -133,7 +133,7 @@ export type ErrorResponse = {
 };
 
 export type SuccessResponse = {
-  data: Array<any>;
+  data: Array<unknown>;
 };
 
 export type GDriveApiBase = Required<

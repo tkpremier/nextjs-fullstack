@@ -8,7 +8,7 @@ import { InterviewDB } from '@/types/db/interview';
 import handleResponse from '@/utils/handleResponse';
 import { Editor as CKEditor } from 'ckeditor5';
 import serialize from 'form-serialize';
-import { FormEvent, useCallback, useState } from 'react';
+import { FormEvent, PointerEvent, useCallback, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -32,14 +32,14 @@ export const Interviews = ({ interviews }: { interviews: InterviewDB[] }) => {
     updateInt(i => ({ ...i, date }));
   };
 
-  const handleRetroChange = (_: any, editor: CKEditor) => {
+  const handleRetroChange = (_: unknown, editor: CKEditor) => {
     updateInt(i => ({ ...i, retro: editor.getData() }));
   };
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const form = e.currentTarget;
-      const data = serialize(form, { hash: true }) as any;
+      const data = serialize(form, { hash: true }) as unknown as object;
 
       const interview = {
         ...updatedInt,
@@ -65,7 +65,7 @@ export const Interviews = ({ interviews }: { interviews: InterviewDB[] }) => {
     },
     [updatedInt]
   );
-  const handleUpdate = (e: React.PointerEvent<HTMLButtonElement>) => {
+  const handleUpdate = (e: PointerEvent<HTMLButtonElement>) => {
     const id = parseInt(e.currentTarget.value, 10);
     if (id === updatedInt.id) {
       return;

@@ -12,31 +12,12 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./db-data:/var/lib/postgresql/data
-    networks: [tk_net]
+    networks: [ tk_net ]
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      test: [ 'CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}' ]
       interval: 5s
       timeout: 5s
       retries: 10
-
-  # api:
-  #   build: ./api
-  #   restart: unless-stopped
-  #   env_file: []
-  #   environment:
-  #     PORT: ${API_PORT}
-  #   dns:
-  #     - 8.8.8.8
-  #     - 8.8.4.4
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   # healthcheck: # 👈 simple HTTP check
-  #   #   test: ['CMD', 'sh', '-c', 'wget -qO- http://localhost:3001/healthz || exit 1']
-  #   #   interval: 10s
-  #   #   timeout: 3s
-  #   #   retries: 10
-  #   networks: [tk_net]
 
   client:
     build: ./
@@ -55,4 +36,4 @@ services:
     #   interval: 10s
     #   timeout: 3s
     #   retries: 10
-    networks: [tk_net]
+    networks: [ tk_net ]

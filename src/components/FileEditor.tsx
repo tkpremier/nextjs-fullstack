@@ -42,8 +42,6 @@ export const DriveFileView = ({
 }) => {
   const [driveFile, setDriveFile] = useState<GoogleDriveAPIResponse>(file);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log('e.target.name: ', e.target.name);
-    console.log('e.target.value: ', e.target.value);
     setDriveFile(f => ({ ...f, [e.target.name]: e.target.value }));
   };
   const handleSubmit = useCallback(

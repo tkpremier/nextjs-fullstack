@@ -1,5 +1,5 @@
 'use client';
-import buttonStyles from '@/styles/button.module.scss';
+import buttonStyles from '@/styles/Button.module.css';
 import styles from '@/styles/header.module.scss';
 import utilStyles from '@/styles/utils.module.scss';
 import { useUser } from '@auth0/nextjs-auth0/client';
@@ -32,7 +32,7 @@ export const Header = () => {
     <Suspense fallback={<header className={styles.header}>Header Loading...</header>}>
       <header
         className={styles.header}
-        // onMouseLeave={handleMouseLeaveHeader}
+      // onMouseLeave={handleMouseLeaveHeader}
       >
         <nav className={styles.headerNav}>
           <ul className={styles.headerWrapper}>

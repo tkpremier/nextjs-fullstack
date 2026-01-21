@@ -12,7 +12,6 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, use, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 const DriveDb = ({ driveData = [] }) => {
-  console.log('DriveDbdriveData: ', driveData);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -205,8 +204,8 @@ const DriveDb = ({ driveData = [] }) => {
         mediaType === 'all'
           ? d.type === 'video' || d.type === 'image'
           : mediaType === 'image'
-          ? d.type === 'image'
-          : d.type === 'video';
+            ? d.type === 'image'
+            : d.type === 'video';
 
       // Filter by hashtags
       const matchesHashtags =

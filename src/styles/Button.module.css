@@ -1,6 +1,4 @@
-// Initial code from https://codepen.io/yuhomyan/pen/OJMejWJ
-
-.button {
+/* .button {
   width: auto;
   color: #fff;
   border-radius: 5px;
@@ -82,7 +80,7 @@
       }
     }
   }
-}
+} */
 
 .card {
   position: relative;
@@ -96,18 +94,18 @@
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
-  &Item {
-    position: absolute;
-    top: 0;
-    right: 0;
-    backface-visibility: hidden;
-    &Back {
-      transform: rotateY(180deg);
-    }
-  }
-  &IsFlipped {
-    pointer-events: all;
-    cursor: pointer;
-    transform: rotateY(180deg);
-  }
+}
+.cardIsFlipped {
+  pointer-events: all;
+  cursor: pointer;
+  transform: rotateY(180deg);
+}
+.cardItem {
+  position: absolute;
+  top: 0;
+  right: 0;
+  backface-visibility: hidden;
+}
+.cardItemBack {
+  transform: rotateY(180deg);
 }

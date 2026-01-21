@@ -1,0 +1,10 @@
+:root {
+  --btn-bg: #333;
+  --btn-text: #fff;
+  --max-width: 1200px;
+}
+
+[data-theme='dark'] {
+  --btn-bg: #fff;
+  --btn-text: #333;
+}

@@ -1,6 +1,7 @@
 import { Header } from '@/components/Header';
 import '@/styles/global.scss';
 import layoutStyles from '@/styles/layout.module.scss';
+import '@/styles/tokens.css';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PropsWithChildren, Suspense } from 'react';

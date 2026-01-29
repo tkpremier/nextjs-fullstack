@@ -2,7 +2,7 @@ import { TabsContext } from "@/context/Tabs";
 import { PropsWithChildren, useContext } from "react";
 
 export const Panel = ({ children, value }: PropsWithChildren<{ value: string }>) => {
-  const { activeTab, setActiveTab, idPrefix } = useContext(TabsContext);
+  const { activeTab, idPrefix } = useContext(TabsContext);
   const isActive = activeTab === value;
   return isActive ? (
     <div

@@ -5,17 +5,6 @@ import Link from 'next/link';
 export default async function Home() {
   return (
     <>
-      <div className={styles.iframeWrapper}>
-        <iframe
-          className={styles.iframe}
-          // width="560"
-          // height="315"
-          src="https://www.youtube-nocookie.com/embed/ibPkLdbG4VU?start=3319"
-          title="This too shall pass"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
       <blockquote>
         &ldquo;...I wish I had known that this too shall pass...You feel bad right now? You feel pissed off? You feel
         angry?...this too shall pass. You feel GREAT? You feel like you know all the answers? You feel like everyone

@@ -1,48 +1,7 @@
 import { Editor as CKEditor } from 'ckeditor5';
 import { drive_v3 } from 'googleapis';
-import { NextApiRequest } from 'next';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { InterviewDB } from './db/interview';
-
-export type NextApiRequestWithQuery = NextApiRequest & {
-  query?: {
-    [key: string]: string;
-  };
-};
-
-export interface ContactDB {
-  createdOn: Date;
-  driveIds: Array<string>;
-  id: number;
-  name: string;
-  platform: string;
-}
-
-export interface Contact {
-  createdOn: string;
-  driveIds: Array<string>;
-  id: number;
-  name: string;
-  platform: string;
-}
-
-export type DriveFile = {
-  id: string;
-  driveId: string;
-  type: string;
-  name: string;
-  webViewLink: string;
-  webContentLink?: string;
-  thumbnailLink?: string;
-  createdTime: string;
-  viewedByMeTime?: string | null;
-  createdOn: string;
-  duration?: number;
-  modelId: Array<number>;
-  description?: string;
-  size?: number;
-};
-
 // Slider types
 export type Sizes = {
   xl?: number;
@@ -118,24 +77,6 @@ export interface ExtendedFormEvent extends React.FormEvent {
   target: HTMLFormElement;
 }
 
-// Insertion page types
-export type FormValue = {
-  selectionSortArray: string;
-};
-
-// DB service types
-export type DbResponse = {
-  rows: Array<unknown>;
-};
-
-export type ErrorResponse = {
-  error: string;
-};
-
-export type SuccessResponse = {
-  data: Array<unknown>;
-};
-
 export type GDriveApiBase = Required<
   Pick<drive_v3.Schema$File, 'kind' | 'id' | 'name' | 'createdTime' | 'mimeType' | 'webViewLink'>
 >;
@@ -154,10 +95,6 @@ export type GDriveApiOptional = Pick<
 >;
 
 export type GoogleDriveAPIResponse = GDriveApiBase & GDriveApiOptional;
-
-export interface IDriveWithModelList extends GoogleDriveAPIResponse {
-  modelId: Array<number>;
-}
 
 // Drive page types
 export type DBData = {
@@ -239,5 +176,3 @@ export type User =
       isAdmin: boolean;
     }
   | undefined;
-
-export type UserContextType = [User, Dispatch<SetStateAction<User>>];

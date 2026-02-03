@@ -1,5 +1,3 @@
-import { MediaType } from '@/components/drive/MediaTypeFilter';
-
 /**
  * Parses comma-separated tags from URL parameter
  * @param tagsParam - URL parameter value for tags (e.g., "#tag1,#tag2")
@@ -38,25 +36,24 @@ export const parseModelsFromURL = (modelsParam: string | null): Set<number> => {
  * @param mediaType - Selected media type
  * @param models - Set of selected model IDs
  */
-export const syncFiltersToURL = (
-  router: { push: (url: string) => void },
-  pathname: string,
-  tags: Set<string>,
-  mediaType: MediaType,
-  models: Set<number>
-) => {
-  const params = new URLSearchParams();
-  if (tags.size > 0) {
-    params.set('tags', Array.from(tags).join(','));
-  }
-  if (mediaType !== 'all') {
-    params.set('mediaType', mediaType);
-  }
-  if (models.size > 0) {
-    params.set('models', Array.from(models).join(','));
-  }
-  const queryString = params.toString();
-  const newUrl = queryString ? `${pathname}?${queryString}` : pathname;
-  router.push(newUrl);
-};
-
+// export const syncFiltersToURL = (
+//   router: { push: (url: string) => void },
+//   pathname: string,
+//   tags: Set<string>,
+//   mediaType: MediaType,
+//   models: Set<number>
+// ) => {
+//   const params = new URLSearchParams();
+//   if (tags.size > 0) {
+//     params.set('tags', Array.from(tags).join(','));
+//   }
+//   if (mediaType !== 'all') {
+//     params.set('mediaType', mediaType);
+//   }
+//   if (models.size > 0) {
+//     params.set('models', Array.from(models).join(','));
+//   }
+//   const queryString = params.toString();
+//   const newUrl = queryString ? `${pathname}?${queryString}` : pathname;
+//   router.push(newUrl);
+// };

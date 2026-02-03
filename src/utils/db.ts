@@ -38,7 +38,7 @@ export const camelCaseObject = <T extends Record<string, unknown>>(obj: T): Reco
   }, {} as Record<string, unknown>);
 
 // Format date fields in an object
-export const formatDateFields = (
+const formatDateFields = (
   obj: Record<string, unknown>,
   dateKeys: string[] = ['createdOn', 'createdTime', 'lastViewed'],
   dateFormat: string = "MM/dd/yyyy' 'h:mm a"

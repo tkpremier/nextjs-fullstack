@@ -19,8 +19,8 @@ export const createModel = async data => {
   try {
     // Check if the column is GENERATED ALWAYS AS IDENTITY
     const identityInfo = await dbQuery.query<{ is_identity: string; identity_generation: string }>(
-      `SELECT is_identity, identity_generation 
-       FROM information_schema.columns 
+      `SELECT is_identity, identity_generation
+       FROM information_schema.columns
        WHERE table_name = 'model' AND column_name = 'id'`,
       []
     );
@@ -76,7 +76,8 @@ export const getAllModels = async () => {
     return {
       data: dbResponse.map((f: ModelDB) =>
         Object.keys(f).reduce((o: { [key: string]: Date | Array<string> | number | string }, k: keyof ModelDB) => {
-          o[camelCase(k)] = f[k] instanceof Date ? format(new Date(f[k]), "MM/dd/yyyy' 'HH:mm:ss") : f[k];
+          o[camelCase(k)] =
+            f[k] instanceof Date ? format(new Date(f[k] as unknown as Date), "MM/dd/yyyy' 'HH:mm:ss") : f[k];
           return o;
         }, {})
       )
@@ -167,7 +168,8 @@ export const deleteModel = async (id: number) => {
     return {
       data: data.map((f: ModelDB) =>
         Object.keys(f).reduce((o: { [key: string]: Date | Array<string> | number | string }, k: keyof ModelDB) => {
-          o[camelCase(k)] = f[k] instanceof Date ? format(new Date(f[k]), "MM/dd/yyyy' 'HH:mm:ss") : f[k];
+          o[camelCase(k)] =
+            f[k] instanceof Date ? format(new Date(f[k] as unknown as Date), "MM/dd/yyyy' 'HH:mm:ss") : f[k];
           return o;
         }, {})
       )

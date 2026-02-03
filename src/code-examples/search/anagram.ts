@@ -61,7 +61,7 @@ export function countAnagramSubstring(s: string): number {
 
   // loop over all different dictionary
   // items and aggregate substring count
-  for (const [k, v] of mp) {
+  for (const [_, v] of mp) {
     anas += Math.floor((v * (v - 1)) / 2);
   }
   return anas;

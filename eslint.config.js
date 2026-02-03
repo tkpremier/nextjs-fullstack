@@ -1,17 +1,19 @@
-const eslint = require('@eslint/js');
-const tseslint = require('@typescript-eslint/eslint-plugin');
-const tsParser = require('@typescript-eslint/parser');
-const nextConfig = require('eslint-config-next');
-const prettierConfig = require('eslint-config-prettier');
-const unusedImports = require('eslint-plugin-unused-imports');
-const nPlugin = require('eslint-plugin-n');
-const prettierPlugin = require('eslint-plugin-prettier');
+import js from '@eslint/js';
+import tseslint from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import nextConfig from 'eslint-config-next';
+import prettierConfig from 'eslint-config-prettier';
+import nPlugin from 'eslint-plugin-n';
+import prettierPlugin from 'eslint-plugin-prettier';
+import unusedImports from 'eslint-plugin-unused-imports';
+import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 
-module.exports = [
+export default defineConfig([
   {
     ignores: ['node_modules/**', '.next/**', '*.config.js', '*.config.*s']
   },
-  eslint.configs.recommended,
+  js.configs.recommended,
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     plugins: {
@@ -24,17 +26,9 @@ module.exports = [
       ecmaVersion: 2022,
       sourceType: 'module',
       globals: {
-        console: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        module: 'readonly',
-        require: 'readonly',
-        exports: 'readonly',
-        global: 'readonly',
-        window: 'readonly',
-        document: 'readonly'
+        ...globals.browser,
+        ...globals.node,
+        RequestInit: 'readonly'
       },
       parser: tsParser,
       parserOptions: {
@@ -70,4 +64,4 @@ module.exports = [
   },
   nextConfig,
   prettierConfig
-];
+]);

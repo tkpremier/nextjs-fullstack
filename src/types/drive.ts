@@ -1,8 +1,5 @@
 // Google API Drive File Types
 
-import { DriveDB } from './db/drive';
-import { OptionalAll } from './util';
-
 export type DriveFile = {
   id: string;
   name: string;
@@ -23,5 +20,3 @@ export type SyncStats = {
   lastPageToken: string | null;
   deleted: number;
 };
-
-export type ODriveFile = OptionalAll<DriveDB>;

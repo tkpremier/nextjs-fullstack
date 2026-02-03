@@ -1,5 +1,3 @@
-import { OptionalAll } from '../util';
-
 export type DriveRowIdentifier = { id: string; drive_id: string };
 
 export type DriveIdentifier = string | number;
@@ -28,5 +26,3 @@ export type DriveUpdatePayload = Record<string, string | number | null | Array<n
   driveId?: DriveIdentifier;
   drive_id?: DriveIdentifier;
 };
-
-export type ODriveFile = OptionalAll<DriveDB>;

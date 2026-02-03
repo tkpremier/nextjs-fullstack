@@ -49,7 +49,7 @@ const Modal = ({ isOpen, onClose, children, title }: React.PropsWithChildren<{ i
           {children}
         </div>
       </div>
-    </div >,
+    </div>,
     document.body
   );
 };

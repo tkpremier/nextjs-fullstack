@@ -88,8 +88,8 @@ export const GridCell = ({ drive, models, handleModels, handleDrive, style }: Gr
           {getDuration(drive?.duration ?? 0)}
         </p>
       ) : null}
-      <ModelForm drive={drive} models={models} handleModels={handleModels} handleDrive={handleDrive} />
-      <DriveFileView source="drive-db" file={drive as unknown as MergedData} handleDrive={handleDrive} />
+      <ModelForm key={drive.id} drive={drive} models={models} handleModels={handleModels} handleDrive={handleDrive} />
+      <DriveFileView key={drive.id} source="drive-db" file={drive as unknown as MergedData} handleDrive={handleDrive} />
     </div>
   );
 };

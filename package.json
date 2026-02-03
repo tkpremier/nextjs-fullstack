@@ -1,6 +1,7 @@
 {
   "name": "tk-premier",
-  "version": "1.00",
+  "version": "2.00",
+  "sideEffects": false,
   "scripts": {
     "dev": "next dev",
     "build": "next build",

@@ -1,0 +1,18 @@
+.stepper {
+  width: 100%;
+}
+
+.step {
+  max-width: 100%;
+  display: none;
+}
+
+.stepActive {
+  display: block;
+}
+
+.stepActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}

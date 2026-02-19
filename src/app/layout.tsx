@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   icons: '/favicon.ico'
 };
 
-const Layout = ({ children }: PropsWithChildren<{}>) => (
+const Layout = ({ children }: PropsWithChildren<object>) => (
   <html>
     <body>
       <div className={layoutStyles.mainRoot}>

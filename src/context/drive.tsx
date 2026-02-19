@@ -12,40 +12,35 @@ export const DriveContext = createContext<[DriveResponse, DriveHandler<DriveResp
 export const DriveProvider = ({ children, source }: PropsWithChildren<{ source: string }>) => {
   const [drive, setDrive] = useState<DriveResponse>({ data: [] } as DriveResponse);
   const getDrive = useCallback(
-    (url: string, options: RequestInit = { method: 'GET', credentials: 'include' }) => {
-      return new Promise<DBDataResponse | Error>(async (resolve, reject) => {
-        try {
-          const response = await handleResponse(await fetch(url, options));
-          if (response instanceof Error) {
-            reject(response);
-            return;
-          }
-          if (options.method === 'PUT') {
-            const updatedDrive = Object.keys(response.data[0]).reduce(
-              (
-                obj:
-                  | (DBData & { [key: string]: string | number | null | Array<number> })
-                  | { [key: string]: string | number | null | Array<number> | undefined | Date },
-                keys: string
-              ) => {
-                obj[camelCase(keys)] = response.data[0][keys];
-                return obj;
-              },
-              {} as DBData & { [key: string]: string | number | null | Array<number> | undefined | Date }
-            ) as DBData;
-            setDrive((prev: DBDataResponse) => {
-              return { data: prev.data.map(d => (d.id === response.data[0].id ? response.data[0] : d)) };
-            });
-            resolve({ data: [updatedDrive] } as { data: DBData[] } | Error);
-            return;
-          }
-          console.log('drive api response: ', response);
-          setDrive({ data: response.data });
-          resolve({ data: response.data });
-        } catch (error) {
-          reject(error);
+    async (url: string, options: RequestInit = { method: 'GET', credentials: 'include' }) => {
+      try {
+        const response = await handleResponse(await fetch(url, options));
+        if (response instanceof Error) {
+          throw response;
         }
-      });
+        if (options.method === 'PUT') {
+          const updatedDrive = Object.keys(response.data[0]).reduce(
+            (
+              obj:
+                | (DBData & { [key: string]: string | number | null | Array<number> })
+                | { [key: string]: string | number | null | Array<number> | undefined | Date },
+              keys: string
+            ) => {
+              obj[camelCase(keys)] = response.data[0][keys];
+              return obj;
+            },
+            {} as DBData & { [key: string]: string | number | null | Array<number> | undefined | Date }
+          ) as DBData;
+          setDrive((prev: DBDataResponse) => ({ data: prev.data.map(d => (d.id === response.data[0].id ? response.data[0] : d)) }));
+          return { data: [updatedDrive] } as { data: DBData[] } | Error;
+
+        }
+        console.log('drive api response: ', response);
+        setDrive({ data: response.data });
+        return { data: response.data };
+      } catch (error) {
+        return error;
+      }
     },
     [setDrive]
   );

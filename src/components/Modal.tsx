@@ -2,10 +2,10 @@
 import { useFocusTrap } from "@/hooks/useFocusTrap";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import styles from '@/styles/Modal.module.css';
-import { useEffect } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-const Modal = ({ isOpen, onClose, children, title }: React.PropsWithChildren<{ isOpen: boolean; onClose: () => void; title: string }>) => {
+const Modal = ({ isOpen, onClose, children, title }: PropsWithChildren<{ isOpen: boolean; onClose: () => void; title: string }>) => {
   // 1. Hook Integration
   useScrollLock(isOpen);
   const modalRef = useFocusTrap(isOpen);

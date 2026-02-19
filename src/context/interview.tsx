@@ -11,31 +11,26 @@ export const InterviewContext = createContext<
 export const InterviewProvider = ({ children }) => {
   const [response, setInterviews] = useState<{ data: Interview[] }>({ data: [] });
   const handleInterviews = useCallback(
-    (url: string, options?: RequestInit & { body?: Interview }) => {
-      return new Promise<{ data: Interview[] } | Error>(async (resolve, reject) => {
-        try {
-          const apiResponse = await handleResponse(await fetch(url, options));
-          if (apiResponse instanceof Error) {
-            console.error('handleInterviews error: ', apiResponse);
-            reject(apiResponse);
-            return;
-          }
-          if (options?.method === 'PUT' || options?.method === 'POST') {
-            const updatedInterview = apiResponse.data as Interview;
-            setInterviews(({ data }) => ({
-              data: data.map(i => (i.id === updatedInterview.id ? updatedInterview : i))
-            }));
-            resolve({ data: [updatedInterview] });
-            return;
-          }
-          setInterviews({ data: apiResponse.data });
-          resolve({ data: apiResponse.data });
-          return;
-        } catch (error) {
-          console.error('handleInterviews error: ', error);
-          reject(error);
+    async (url: string, options?: RequestInit & { body?: Interview }) => {
+      try {
+        const apiResponse = await handleResponse(await fetch(url, options));
+        if (apiResponse instanceof Error) {
+          console.error('handleInterviews error: ', apiResponse);
+          throw apiResponse;
         }
-      });
+        if (options?.method === 'PUT' || options?.method === 'POST') {
+          const updatedInterview = apiResponse.data as Interview;
+          setInterviews(({ data }) => ({
+            data: data.map(i => (i.id === updatedInterview.id ? updatedInterview : i))
+          }));
+          return { data: [updatedInterview] };
+        }
+        setInterviews({ data: apiResponse.data });
+        return { data: apiResponse.data };
+      } catch (error) {
+        console.error('handleInterviews error: ', error);
+        return error;
+      };
     },
     [setInterviews]
   );

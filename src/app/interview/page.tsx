@@ -9,7 +9,9 @@ export const metadata: Metadata = {
   description: "TK Premier's Interviews"
 };
 
-export default async () => {
+const InterviewPage = async () => {
   const { data } = await getInterview();
   return <Interviews interviews={data} />;
 };
+
+export default InterviewPage;

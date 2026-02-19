@@ -2,18 +2,23 @@ export const binaryIterative = (arr, x) => {
   let l = 0;
   let r = arr.length - 1;
   let mid;
-  while (r >= 1) {
-    mid = 1 + Math.floor((r - 1) / 2);
+  while (r >= l) {
+    mid = l + Math.floor((r - l) / 2);
 
-    // x equals mid
+    // If the element is present at the middle
+    // itself
     if (arr[mid] === x) {
       return mid;
     }
 
-    // if x is smaller than mid, then go left
+    // If element is smaller than mid, then
+    // it can only be present in left subarray
     if (arr[mid] > x) {
       r = mid - 1;
-    } else {
+    }
+    // Else the element can only be present
+    // in right subarray
+    else {
       l = mid + 1;
     }
   }

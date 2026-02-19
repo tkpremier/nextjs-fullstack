@@ -1,14 +1,13 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
 import {
-  binaryIterative,
-  binaryRecursive,
   bubbleSortCode,
   insertionSortCode,
   selectionSortCode
 } from '@/code-examples';
+// import { binaryRecursive } from '@/code-examples/search/recursiveSearch';
 import { Code } from '@/components/Code';
 import { Drawer } from '@/components/Drawer';
+import { Metadata } from 'next';
+import Link from 'next/link';
 import { MergeSortForm } from './MergeSortForm';
 
 export const metadata: Metadata = {
@@ -354,7 +353,7 @@ const Learn = () => (
                 <li>
                   Else narrow the interval to <strong>right half</strong> and then <strong>recur</strong> it again.
                 </li>
-                <li>
+                {/* <li>
                   Binary search can be implemented in two ways
                   <ul>
                     <Drawer header="Iterative Method">
@@ -365,7 +364,7 @@ const Learn = () => (
                       <Link href="/learn/binary">Binary Search</Link>
                     </Drawer>
                   </ul>
-                </li>
+                </li> */}
                 <li>
                   <strong>Auxiliary Space</strong>: O(1)
                 </li>

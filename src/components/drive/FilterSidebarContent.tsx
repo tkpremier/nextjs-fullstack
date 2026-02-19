@@ -1,6 +1,6 @@
 'use client';
+import { useFilterSidebar } from '@/hooks/useFilterSidebar';
 import { ReactNode, useEffect } from 'react';
-import { useFilterSidebar } from '@/hooks/filterSidebar';
 
 interface FilterSidebarContentProps {
   children: ReactNode;

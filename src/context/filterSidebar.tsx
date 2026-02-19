@@ -12,7 +12,18 @@ interface FilterSidebarContextType {
   setActiveFilterCount: (count: number) => void;
 }
 
-export const FilterSidebarContext = createContext<FilterSidebarContextType | undefined>(undefined);
+const defaultFilterSidebar: FilterSidebarContextType = {
+  openSidebar: () => true,
+  closeSidebar: () => true,
+  toggleSidebar: () => true,
+  content: null,
+  setContent: () => true,
+  activeFilterCount: 0,
+  setActiveFilterCount: () => 0,
+  isOpen: false
+}
+
+export const FilterSidebarContext = createContext<FilterSidebarContextType | undefined>(defaultFilterSidebar);
 
 export const FilterSidebarProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);

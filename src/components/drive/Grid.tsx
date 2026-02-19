@@ -9,7 +9,7 @@ import { drive_v3 } from 'googleapis';
 import isNull from 'lodash/isNull';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Fragment, useCallback, useMemo, useState } from 'react';
+import { ChangeEvent, Fragment, useCallback, useMemo, useState } from 'react';
 import { Drawer } from '../Drawer';
 import { DriveFileView } from '../FileEditor';
 import { FilterSidebarContent } from './FilterSidebarContent';
@@ -31,31 +31,29 @@ export const Grid = ({ files, nextPageToken }: { files: MergedData[]; nextPageTo
     );
     const { files, nextPageToken }: drive_v3.Schema$FileList = await response.json();
     const newData: Array<MergedData> =
-      files?.map((f: GoogleDriveAPIResponse) => {
-        return {
-          ...f,
-          ...(f.description && { description: f.description }),
-          ...(f.size && { size: f.size }),
-          ...(f.webContentLink != null && { webContentLink: f.webContentLink }),
-          ...(f.thumbnailLink != null && { thumbnailLink: f.thumbnailLink }),
-          id: f.id!,
-          name: f.name!,
-          driveId: f.id!,
-          webViewLink: f.webViewLink!,
-          modelId: [],
-          createdTime: format(new Date(f.createdTime!), 'MM/dd/yyyy, h:mm a'),
-          viewedByMeTime:
-            f.viewedByMeTime && !isNull(f.viewedByMeTime)
-              ? format(new Date(f.viewedByMeTime), 'MM/dd/yyyy, h:mm a')
-              : null,
-          type: f.mimeType!
-        } as unknown as MergedData;
-      }) ?? [];
+      files?.map((f: GoogleDriveAPIResponse) => ({
+        ...f,
+        ...(f.description && { description: f.description }),
+        ...(f.size && { size: f.size }),
+        ...(f.webContentLink != null && { webContentLink: f.webContentLink }),
+        ...(f.thumbnailLink != null && { thumbnailLink: f.thumbnailLink }),
+        id: f.id!,
+        name: f.name!,
+        driveId: f.id!,
+        webViewLink: f.webViewLink!,
+        modelId: [],
+        createdTime: format(new Date(f.createdTime!), 'MM/dd/yyyy, h:mm a'),
+        viewedByMeTime:
+          f.viewedByMeTime && !isNull(f.viewedByMeTime)
+            ? format(new Date(f.viewedByMeTime), 'MM/dd/yyyy, h:mm a')
+            : null,
+        type: f.mimeType!
+      } as unknown as MergedData)) ?? [];
     setDriveData(state => ({ ...state, files: state.files.concat(newData), nextPageToken: nextPageToken ?? '' }));
   }, [driveData]);
   const handleSort = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => (e.target.value !== sortDir ? sortBy(e.target.value) : null),
-    []
+    (e: ChangeEvent<HTMLSelectElement>) => (e.target.value !== sortDir ? sortBy(e.target.value) : null),
+    [sortDir]
   );
   const sortedData = useMemo(() => {
     // First filter by media type
@@ -74,10 +72,10 @@ export const Grid = ({ files, nextPageToken }: { files: MergedData[]; nextPageTo
     const hashtagFiltered =
       selectedHashtags.size > 0
         ? filtered.filter(file => {
-            const fileHashtags = extractHashtags(file.description);
-            // Show file if it contains ANY of the selected hashtags
-            return fileHashtags.some(tag => selectedHashtags.has(tag));
-          })
+          const fileHashtags = extractHashtags(file.description);
+          // Show file if it contains ANY of the selected hashtags
+          return fileHashtags.some(tag => selectedHashtags.has(tag));
+        })
         : filtered;
 
     hashtagFiltered.sort((a, b): number => {
@@ -86,9 +84,9 @@ export const Grid = ({ files, nextPageToken }: { files: MergedData[]; nextPageTo
         if (a.videoMediaMetadata && b.videoMediaMetadata) {
           return dir === 'desc'
             ? parseInt(b.videoMediaMetadata?.durationMillis ?? '0', 10) -
-                parseInt(a.videoMediaMetadata?.durationMillis ?? '0', 10)
+            parseInt(a.videoMediaMetadata?.durationMillis ?? '0', 10)
             : parseInt(a.videoMediaMetadata?.durationMillis ?? '0', 10) -
-                parseInt(b.videoMediaMetadata?.durationMillis ?? '0', 10);
+            parseInt(b.videoMediaMetadata?.durationMillis ?? '0', 10);
         }
         if (a.videoMediaMetadata && !b.videoMediaMetadata) {
           return -1;

@@ -1,13 +1,11 @@
 'use client';
+import { FilterSidebarProvider } from '@/context/FilterSidebar';
 import { ReactNode } from 'react';
-import { FilterSidebarProvider } from '@/context/filterSidebar';
 import { FilterSidebar } from './FilterSidebar';
 
-export const FilterSidebarProviderWrapper = ({ children }: { children: ReactNode }) => {
-  return (
-    <FilterSidebarProvider>
-      {children}
-      <FilterSidebar />
-    </FilterSidebarProvider>
-  );
-};
+export const FilterSidebarProviderWrapper = ({ children }: { children: ReactNode }) => (
+  <FilterSidebarProvider>
+    {children}
+    <FilterSidebar />
+  </FilterSidebarProvider>
+);

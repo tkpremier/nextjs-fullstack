@@ -1,5 +1,5 @@
+import { FilterSidebarContext } from '@/context/FilterSidebar';
 import { useContext } from 'react';
-import { FilterSidebarContext } from '@/context/filterSidebar';
 
 export const useFilterSidebar = () => {
   const context = useContext(FilterSidebarContext);

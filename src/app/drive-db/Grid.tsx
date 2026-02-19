@@ -5,13 +5,12 @@ import { FilterSidebarContent } from '@/components/drive/FilterSidebarContent';
 import { DriveContext } from '@/context/drive';
 import { ModelContext } from '@/context/model';
 import { DBDataResponse, MediaType, SortOptionKeys } from '@/types';
-import { DriveDB } from '@/types/db/drive';
 import { parseModelsFromURL, parseTagsFromURL } from '@/utils/drive-db';
 import { extractHashtags } from '@/utils/hashTags';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, use, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ChangeEvent, use, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-const DriveDb = ({ driveData = [] }) => {
+const DriveDbPage = ({ driveData = [] }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -167,7 +166,7 @@ const DriveDb = ({ driveData = [] }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedHashtags, selectedModels, mediaType, pathname, router]);
   const handleSort = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => (e.target.value !== sortDir ? sortBy(e.target.value) : null),
+    (e: ChangeEvent<HTMLSelectElement>) => (e.target.value !== sortDir ? sortBy(e.target.value) : null),
     [sortDir, sortBy]
   );
   const handleHashtagClick = useCallback((tag: string) => {
@@ -185,7 +184,7 @@ const DriveDb = ({ driveData = [] }) => {
     });
   }, []);
 
-  const handleToggleModel = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleToggleModel = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setSelectedModels(prev => {
       const newSet = new Set(prev);
       const modelId = parseInt(e.target.value);
@@ -219,9 +218,7 @@ const DriveDb = ({ driveData = [] }) => {
     console.log('filtered: ', filtered);
     return filtered;
   }, [driveData, selectedHashtags, selectedModels, mediaType]);
-  const sortedModels = useMemo(() => {
-    return [...allModels].sort((a, b) => a.name.localeCompare(b.name));
-  }, [allModels]);
+  const sortedModels = useMemo(() => [...allModels].sort((a, b) => a.name.localeCompare(b.name)), [allModels]);
 
   const activeFilterCount = selectedHashtags.size + selectedModels.size + (mediaType !== 'all' ? 1 : 0);
 
@@ -260,8 +257,4 @@ const DriveDb = ({ driveData = [] }) => {
   );
 };
 
-export default ({ driveData }: { driveData: DriveDB[] }) => (
-  <Suspense fallback={<div>Drive DB Loading...</div>}>
-    <DriveDb driveData={driveData} />
-  </Suspense>
-);
+export default DriveDbPage;

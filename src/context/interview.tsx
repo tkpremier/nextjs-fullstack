@@ -36,7 +36,7 @@ export const InterviewProvider = ({ children }) => {
   );
   useEffect(() => {
     handleInterviews(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/interview`);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const data = useMemo(
     () =>
       response.data.map((d: Interview) => ({ ...d, date: new Date(d.date).toLocaleDateString() as unknown as Date })),

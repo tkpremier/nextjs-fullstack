@@ -5,40 +5,40 @@ import { Form } from './Form';
 import { DBDataResponse, DriveHandler, DriveResponse, GoogleDriveAPIResponse } from '@/types';
 import handleResponse from '@/utils/handleResponse';
 import serialize from 'form-serialize';
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
 
-const updateDriveFileApi = (
+const updateDriveFileApi = async (
   driveId: string,
   options: RequestInit & { body?: Partial<GoogleDriveAPIResponse> } = {
     method: 'PATCH',
     credentials: 'include'
   } as RequestInit & { body?: Partial<GoogleDriveAPIResponse> }
-) => new Promise<{ data: GoogleDriveAPIResponse } | Error>(async (resolve, reject) => {
+) => {
   try {
     if (!driveId) {
-      reject(new Error('Drive ID is required'));
+      throw (new Error('Drive ID is required'));
     }
     const response = await handleResponse(
-      await fetch(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-google/${driveId}`, options)
+      await fetch(`/api/drive-google/${driveId}`, options)
     );
     if (response instanceof Error) {
-      reject(response);
+      throw response;
     } else {
-      resolve({ data: response as GoogleDriveAPIResponse });
+      return { data: response as GoogleDriveAPIResponse };
     }
   } catch (error) {
-    reject(error);
+    return { data: {}, error };
   }
-});
+};
 
 export const DriveFileView = ({
   source = 'drive-google',
   file,
-  handleDrive
+  handleDriveAction
 }: {
   source?: 'drive-db' | 'drive-google';
   file: GoogleDriveAPIResponse;
-  handleDrive?: DriveHandler<DriveResponse>;
+  handleDriveAction?: DriveHandler<DriveResponse>;
 }) => {
   const [driveFile, setDriveFile] = useState<GoogleDriveAPIResponse>(file);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,7 @@ export const DriveFileView = ({
       const data = serialize(form, { hash: true }) as any;
 
       const options = {
-        credentials: 'include' as RequestCredentials,
+        credentials: 'include' as unknown as RequestCredentials,
         method: source === 'drive-google' ? 'PATCH' : 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -70,8 +70,8 @@ export const DriveFileView = ({
           .catch(err => console.log('err: ', err));
         return;
       }
-      if (handleDrive) {
-        handleDrive(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-list/${driveFile?.id}`, options)
+      if (source === 'drive-db') {
+        handleDriveAction(`/api/drive-google/${driveFile?.id}`, options)
           .then(res => {
             if (!(res instanceof Error)) {
               const body: Partial<GoogleDriveAPIResponse> = {
@@ -97,14 +97,10 @@ export const DriveFileView = ({
           .catch(err => console.log('err: ', err));
       }
     },
-    [driveFile]
+    [driveFile, handleDriveAction, source]
   );
-  useEffect(() => {
-    if (file.id !== driveFile.id) {
-      setDriveFile(file);
-    }
-  }, [file, driveFile]);
-  return !isNull(driveFile) && driveFile ? (
+
+  return !isNull(file) && file ? (
     <Form onSubmit={handleSubmit}>
       <h4>Update Drive Info</h4>
       <input type="text" name="name" value={driveFile.name ?? ''} onChange={handleChange} />

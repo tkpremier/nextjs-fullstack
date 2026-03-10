@@ -1,9 +1,13 @@
-import { getAllModels } from '@/services/db/model';
+'use client';
+import { ModelContext } from '@/context/model';
 import { Model } from '@/types/db/model';
 import Link from 'next/link';
+import { useContext } from 'react';
 
-export default async () => {
-  const { data: models } = await getAllModels();
+const ModelsPage = () => {
+
+  const [models = [], dispatch] = useContext(ModelContext);
+  // console.log('ModelsPage: ', models);
   return (
     <div>
       <h1>Models</h1>
@@ -17,3 +21,5 @@ export default async () => {
     </div>
   );
 };
+
+export default ModelsPage;

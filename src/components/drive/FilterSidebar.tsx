@@ -1,16 +1,24 @@
 'use client';
 import { useFilterSidebar } from '@/hooks/useFilterSidebar';
 import styles from '@/styles/filterSidebar.module.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export const FilterSidebar = () => {
   const { isOpen, toggleSidebar, closeSidebar, content, activeFilterCount } = useFilterSidebar();
 
+  const [isMounted, mount] = useState(false);
+
   // Only mount on client side
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
+  useEffect(() => {
+    if (!isMounted) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      mount(true);
+    }
+    return () => {
+      mount(false);
+    }
+  }, []);
 
   // Prevent body scroll when sidebar is open
   useEffect(() => {
@@ -27,7 +35,7 @@ export const FilterSidebar = () => {
 
   }, [isOpen]);
 
-  if (typeof document !== 'undefined') {
+  if (isMounted) {
 
     // Don't render until mounted (prevents hydration mismatch
 

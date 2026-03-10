@@ -1,4 +1,5 @@
-import { PropsWithChildren } from 'react';
 import { ModelProvider } from '@/context/model';
+import { PropsWithChildren } from 'react';
 
-export default ({ children }: PropsWithChildren<{}>) => <ModelProvider>{children}</ModelProvider>;
+const ModelPageLayout = ({ children }: PropsWithChildren<unknown>) => <ModelProvider>{children}</ModelProvider>;
+export default ModelPageLayout

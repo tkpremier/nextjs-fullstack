@@ -1,28 +1,25 @@
 'use client';
-import { DBData, DriveHandler, DriveResponse } from '@/types';
+import { ModelContext } from '@/context/model';
+import { DBData } from '@/types';
 import { Model } from '@/types/db/model';
+import handleResponse from '@/utils/handleResponse';
 import serialize from 'form-serialize';
 import omit from 'lodash/omit';
 import uniq from 'lodash/uniq';
 import Link from 'next/link';
-import { useCallback, useState } from 'react';
+import { FormEvent, useCallback, useContext, useState } from 'react';
 import { Form } from './Form';
 export const ModelForm = ({
   drive,
-  models,
-  handleDrive,
-  handleModels
 }: {
   drive: DBData;
-  models: Model[];
-  handleModels: (url: string, options?: RequestInit & { body?: Model }) => Promise<{ data: Model[] } | Error>;
-  handleDrive: DriveHandler<DriveResponse>;
 }) => {
   const [message, setMessage] = useState<string>('');
   const [modelId, setModelId] = useState<number>(0);
   const [modelName, setModelName] = useState<string>('');
   const [modelPlatform, setModelPlatform] = useState<string>('');
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [models, handleModels] = useContext(ModelContext);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = serialize(e.target as HTMLFormElement, { hash: true });
     const modelId = parseInt(data.id as string);
@@ -43,7 +40,7 @@ export const ModelForm = ({
       'driveId'
     );
     const options = {
-      credentials: 'include' as RequestCredentials,
+      credentials: 'include',
       method: modelId === 0 ? 'POST' : 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -55,12 +52,12 @@ export const ModelForm = ({
     // updateDrive(modelId, data.driveId as string);
 
     handleModels(
-      `${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/model${options.method === 'POST' ? '' : `/${modelId}`}`,
+      `/api/model${options.method === 'POST' ? '' : `/${modelId}`}`,
       options as unknown as RequestInit & { body?: Model | undefined }
     )
       .then(res => {
         if (!(res instanceof Error)) {
-          const model = typeof res.data[0] === 'string' ? JSON.parse(res.data[0]) : res.data[0];
+          const model = typeof res[0] === 'string' ? JSON.parse(res[0]) : res[0];
           updateDrive(model.id, data.driveId as string);
           setModelId(model.id);
           setModelName(model.name);
@@ -72,9 +69,9 @@ export const ModelForm = ({
   const modelDrive = models.find(model => model.driveIds.includes(drive.id));
 
   const updateDrive = useCallback(
-    (modelId: number, driveId: string = drive.id) => {
+    async (modelId: number, driveId: string = drive.id) => {
       const options = {
-        credentials: 'include' as RequestCredentials,
+        credentials: 'include',
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -85,16 +82,13 @@ export const ModelForm = ({
         })
       };
 
-      handleDrive(`${process.env.NEXT_PUBLIC_APP_BASE_URL}/api/drive-list/${driveId}`, options)
-        .then(res => {
-          console.log('data.driveId: ', driveId);
-          console.log('drive.id: ', drive.id);
-          console.log('res: ', res);
-          setMessage(`Drive updated successfully`);
-        })
-        .catch(err => console.log('err: ', err));
+      const response = await handleResponse(await fetch(`/api/drive-google/${driveId}`, options));
+      console.log('data.driveId: ', driveId);
+      console.log('drive.id: ', drive.id);
+      console.log('res: ', response);
+
     },
-    [modelDrive, drive, handleDrive]
+    [drive]
   );
   const hasModel = drive.modelId.includes(modelDrive?.id ?? 0) || Boolean(modelDrive);
   return (

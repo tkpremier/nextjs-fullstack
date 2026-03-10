@@ -215,7 +215,6 @@ const DriveDbPage = ({ driveData = [] }) => {
 
       return matchesMediaType && matchesHashtags && matchesModels;
     });
-    console.log('filtered: ', filtered);
     return filtered;
   }, [driveData, selectedHashtags, selectedModels, mediaType]);
   const sortedModels = useMemo(() => [...allModels].sort((a, b) => a.name.localeCompare(b.name)), [allModels]);
@@ -250,8 +249,8 @@ const DriveDbPage = ({ driveData = [] }) => {
           return dir === 'desc' ? Number(b[key] ?? 0) - Number(a[key] ?? 0) : Number(a[key] ?? 0) - Number(b[key] ?? 0);
         })}
         models={sortedModels}
-        handleDrive={handleDrive}
-        handleModels={handleModels}
+      // handleDrive={handleDrive}
+      // handleModels={handleModels}
       />
     </>
   );

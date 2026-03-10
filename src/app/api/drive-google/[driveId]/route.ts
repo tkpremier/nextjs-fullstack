@@ -20,6 +20,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ driveId
   const { driveId } = await params;
   try {
     const data = await getFile(driveId);
+    console.log('api drive-google get', data);
     return NextResponse.json(data, { status: 200 });
   } catch (e) {
     console.error('getFileApi error: ', e);

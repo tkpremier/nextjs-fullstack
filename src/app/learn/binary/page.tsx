@@ -1,6 +1,6 @@
 'use client';
-import { binaryRecursive as recursiveApproach } from '@/code-examples/search/iterativeSearch';
-import { binaryRecursive } from '@/code-strings/search/iterativeSearch';
+import { binaryRecursive as recursiveApproach } from '@/code-examples/search/iterative';
+import { binaryRecursive } from '@/code-strings/search/iterative';
 import { Code } from '@/components/Code';
 import styles from '@/styles/code.module.scss';
 import serialize from 'form-serialize';
@@ -20,7 +20,7 @@ export default function Binary() {
   }, []);
   const handleSubmit: React.FormEventHandler = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { search } = serialize(e.currentTarget, { hash: true }) as any;
+    const { search } = serialize(e.currentTarget, { hash: true }) as unknown as { search: string };
     if (!Number.isNaN(parseInt(search, 10))) {
       setTarget(parseInt(search, 10));
     }

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "create-all-tables": "node ./src/_db/dev/dbConnection.js createAllTables",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",

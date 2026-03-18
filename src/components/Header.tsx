@@ -16,13 +16,9 @@ export const Header = () => {
   const searchParams = useSearchParams();
 
   // Construct the current URL for redirect
-  const currentUrl = useMemo(() => {
-    return pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-  }, [pathname, searchParams]);
+  const currentUrl = useMemo(() => `${pathname}${(searchParams.toString() ? `?${searchParams.toString()}` : '')}`, [pathname, searchParams]);
 
-  const loginUrl = useMemo(() => {
-    return `/auth/login${currentUrl ? `?returnTo=${encodeURIComponent(currentUrl)}` : ''}`;
-  }, [currentUrl]);
+  const loginUrl = useMemo(() => `/auth/login${currentUrl ? `?returnTo=${encodeURIComponent(currentUrl)}` : ''}`, [currentUrl]);
 
   const handleToggle = useCallback(() => {
     toggleOffCanvas(open => !open);
@@ -38,7 +34,7 @@ export const Header = () => {
           <ul className={styles.headerWrapper}>
             <li className={classNames(styles.headerNavItem, styles.headerNavItemMenu)}>
               <button onClick={handleToggle} className={styles.hamBurger} type="button" aria-label="Toggle Button">
-                <img src="/images/hamburger.svg" width={36} height={36} alt="Hamburger" />
+                <Image src="/images/hamburger.svg" width={36} height={36} alt="Hamburger" />
               </button>
             </li>
             <li className={classNames(styles.headerNavItem, styles.headerNavItemName)}>
@@ -52,9 +48,9 @@ export const Header = () => {
             <li className={styles.headerNavItem}>
               <Link href="/learn">Learn</Link>
             </li>
-            <li className={styles.headerNavItem}>
+            {/* <li className={styles.headerNavItem}>
               <Link href="/interview">Interviews</Link>
-            </li>
+            </li> */}
             <li className={styles.headerNavItem}>
               {user ? <Link href="/auth/logout">Logout</Link> : <Link href={loginUrl}>Login</Link>}
             </li>
@@ -104,9 +100,9 @@ export const Header = () => {
           <li className={styles.offCanvasNavItem}>
             <Link href="/learn">Learn</Link>
           </li>
-          <li className={styles.offCanvasNavItem}>
+          {/* <li className={styles.offCanvasNavItem}>
             <Link href="/interview">Interviews</Link>
-          </li>
+          </li> */}
           <li className={styles.offCanvasNavItem}>
             {user ? <a href="/auth/logout">Logout</a> : <a href={loginUrl}>Login</a>}
           </li>

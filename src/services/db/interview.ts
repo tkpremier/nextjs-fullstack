@@ -1,15 +1,15 @@
 import dbQuery from '@/_db/dev/dbQuery';
-import { InterviewDB } from '@/types/db/interview';
 
 export const getInterview = async () => {
   const getInterviewQuery = `SELECT * FROM
   interview ORDER BY date DESC`;
   try {
-    const { rows: data } = await dbQuery.query<InterviewDB>(getInterviewQuery, []);
+    const { rows: data } = await dbQuery.query(getInterviewQuery, []);
     if (data[0] === undefined) {
       console.log('There are no interviews');
       return { data: [] };
     }
+    console.log('Interviews: ', data);
     return { data };
   } catch (error) {
     console.error('An error occurred fetching interviews', error);

@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 };
 
 const InterviewPage = async () => {
-  const { data } = await getInterview();
+  const { data, error } = await getInterview();
+  if (error) {
+    console.log('Page error: ', error);
+  }
   return <Interviews interviews={data} />;
 };
 

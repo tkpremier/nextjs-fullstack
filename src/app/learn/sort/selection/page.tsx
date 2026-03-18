@@ -1,7 +1,7 @@
+import { selectionSortCode, selectionSortStableCode } from '@/code-strings/search/sort';
+import { Code } from '@/components/Code';
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { selectionSortCode, selectionSortStableCode } from '@/code-examples';
-import { Code } from '@/components/Code';
 import { SelectionSortForm, SelectionSortStringForm } from './SelectionSortForm';
 
 export const metadata: Metadata = {

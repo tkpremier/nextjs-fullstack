@@ -1,24 +1,22 @@
 'use client';
 import { DriveFileView } from '@/components/FileEditor';
-import { ModelForm } from '@/components/ModelForm';
 import styles from '@/styles/grid.module.scss';
-import { DBData, DriveHandler, DriveResponse, MergedData } from '@/types';
+import { DBData, MergedData } from '@/types';
 import { Model } from '@/types/db/model';
 import { formatBytes, getDuration, getImageLink } from '@/utils';
 import isNull from 'lodash/isNull';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CSSProperties } from 'react';
+import { ModelForm } from '../ModelForm';
 
 interface GridCellProps {
   drive: DBData;
   models: Model[];
-  handleModels: (url: string, options?: RequestInit & { body?: Model }) => Promise<{ data: Model[] } | Error>;
-  handleDrive: DriveHandler<DriveResponse>;
   style?: CSSProperties;
 }
 
-export const GridCell = ({ drive, models, handleModels, handleDrive, style }: GridCellProps) => (
+export const GridCell = ({ drive, models, style }: GridCellProps) => (
   <div style={style} className={styles.gridItem}>
     {drive.thumbnailLink && !isNull(drive.thumbnailLink) ? (
       <a href={drive.webViewLink} target="_blank" rel="noreferrer nofollower">
@@ -88,7 +86,7 @@ export const GridCell = ({ drive, models, handleModels, handleDrive, style }: Gr
         {getDuration(drive?.duration ?? 0)}
       </p>
     ) : null}
-    <ModelForm key={`model_form-${drive.id}`} drive={drive} models={models} handleModels={handleModels} handleDrive={handleDrive} />
-    <DriveFileView key={`file_view-${drive.id}`} source="drive-db" file={drive as unknown as MergedData} handleDrive={handleDrive} />
+    <ModelForm key={`model_form-${drive.id}`} drive={drive} />
+    <DriveFileView key={`file_view-${drive.id}`} source="drive-db" file={drive as unknown as MergedData} />
   </div>
 );

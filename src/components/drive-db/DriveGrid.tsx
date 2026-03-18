@@ -1,6 +1,6 @@
 'use client';
 import utilsStyles from '@/styles/utils.module.scss';
-import { DBData, DriveHandler, DriveResponse } from '@/types';
+import { DBData } from '@/types';
 import { Model } from '@/types/db/model';
 import { useEffect, useState } from 'react';
 import { experimental_VGrid as VGrid } from 'virtua';
@@ -19,11 +19,11 @@ const ROW_HEIGHT = 1200;
 interface DriveGridProps {
   data: DBData[];
   models: Model[];
-  handleModels: (url: string, options?: RequestInit & { body?: Model }) => Promise<{ data: Model[] } | Error>;
-  handleDrive: DriveHandler<DriveResponse>;
+  // handleModels: (url: string, options?: RequestInit & { body?: Model }) => Promise<{ data: Model[] } | Error>;
+  // handleDrive: DriveHandler<DriveResponse>;
 }
 
-export const DriveGrid = ({ data, models, handleModels, handleDrive }: DriveGridProps) => {
+export const DriveGrid = ({ data, models, }: DriveGridProps) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   useEffect(() => {
     const updateDimensions = () => {
@@ -49,7 +49,6 @@ export const DriveGrid = ({ data, models, handleModels, handleDrive }: DriveGrid
   if (dimensions.width === 0 || data.length === 0) {
     return <div>Loading...</div>;
   }
-
   return (
     <div style={{ width: dimensions.width, height: gridHeight, display: 'flex' }}>
       <VGrid
@@ -66,7 +65,7 @@ export const DriveGrid = ({ data, models, handleModels, handleDrive }: DriveGrid
           if (!drive) {
             return null;
           }
-          return <GridCell drive={drive} models={models} handleModels={handleModels} handleDrive={handleDrive} />;
+          return <GridCell drive={drive} models={models} />;
         }}
       </VGrid>
     </div>

@@ -2,8 +2,10 @@ import { FilterSidebarProviderWrapper } from '@/components/drive/FilterSidebarPr
 import { ModelProvider } from '@/context/model';
 import { PropsWithChildren } from 'react';
 
-export default ({ children }: PropsWithChildren<{}>) => (
+const DrivePageLayout = ({ children }: PropsWithChildren<unknown>) => (
   <FilterSidebarProviderWrapper>
     <ModelProvider>{children}</ModelProvider>
   </FilterSidebarProviderWrapper>
 );
+
+export default DrivePageLayout

@@ -28,6 +28,8 @@ export default defineConfig([
       globals: {
         ...globals.browser,
         ...globals.node,
+        React: 'readonly',
+        RequestCredentials: 'readonly',
         RequestInit: 'readonly'
       },
       parser: tsParser,

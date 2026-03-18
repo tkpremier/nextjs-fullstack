@@ -1,74 +1,85 @@
-import { TZDate } from '@date-fns/tz';
-import { format } from 'date-fns';
+import { getDrive } from '@/services/db/drive';
+import { getFile } from '@/services/drive';
+import { getDuration, getImageLink } from '@/utils';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import { DriveFileView } from '@/components/FileEditor';
-import { getDuration, getImageLink } from '@/utils';
-import handleResponse from '@/utils/handleResponse';
 
 const getDriveFile = async (driveId: string) => {
   try {
-    const response = await handleResponse(
-      await fetch(`${process.env.INTERNAL_API_URL}/api/drive-list/${driveId}`, { credentials: 'include' })
-    );
-    return response;
+    const response = Promise.all([getDrive(driveId), getFile(driveId)]).then(values => values)
+    return [response[0], response[1]]
   } catch (error) {
     console.error('DriveFile error: ', error);
-    return { data: [undefined] };
+    return [[], []]
   }
 };
 
 const DriveDbFile = async ({ params }: { params: Promise<{ driveId: string }> }) => {
   const { driveId } = await params;
-  const { data } = await getDriveFile(driveId);
-  const drive = data[0];
-  return drive ? (
-    <Suspense fallback={<div>Loading...</div>}>
-      <h2>{drive.name}</h2>
-      {drive.webViewLink ? (
-        <a href={drive.webViewLink} target="_blank" rel="noreferrer nofollower">
-          {drive.thumbnailLink ? (
-            <Image
-              src={getImageLink(drive.thumbnailLink, 's2400', 's220')}
-              referrerPolicy="no-referrer"
-              loading="lazy"
-              title={`${drive.name}`}
-              alt={`${drive.name} - Thumbnail`}
-              width={1200}
-              height={1200 * (9 / 16)}
-              placeholder="blur"
-              blurDataURL="/images/video_placeholder_165x103.svg"
-            />
-          ) : (
-            <Image
-              src="/images/video_placeholder_165x103.svg"
-              alt={`${drive.name} - Placeholder`}
-              width={600}
-              height={338}
-            />
-          )}
-        </a>
-      ) : null}
-      <p>
-        <strong>Created on: </strong>
-        {format(new TZDate(drive.createdTime ?? '', 'America/New_York'), 'MM/dd/yyyy, h:mm a')}
-      </p>
-      {drive.viewedByMeTime ? (
-        <p>
-          <strong>Last viewed: </strong>
-          {format(new TZDate(drive.viewedByMeTime, 'America/New_York'), 'MM/dd/yyyy, h:mm a')}
-        </p>
-      ) : null}
-      {drive.duration ? (
-        <p>
-          <strong>Duration: </strong>
-          {getDuration(parseInt(drive.duration ?? '0', 10))}
-        </p>
-      ) : null}
-
-      <DriveFileView file={drive} source="drive-db" />
-    </Suspense>
-  ) : null;
+  const [db, api] = await getDriveFile(driveId);
+  const drive = db?.data ? Array.isArray(db?.data) && db.data.length > 0 ? db?.data[0] : db.data : { data: {} };
+  console.log('db: ', db);
+  console.log()
+  return (
+    <>
+      {
+        drive ? (
+          <Suspense fallback={<div>Loading Db Data...</div>}>
+            <h2>{drive.name}</h2>
+            {drive.webViewLink ? (
+              <a href={drive.webViewLink} target="_blank" rel="noreferrer nofollower">
+                {drive.thumbnailLink ? (
+                  <Image
+                    src={getImageLink(drive.thumbnailLink, 's2400', 's220')}
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                    title={`${drive.name}`}
+                    alt={`${drive.name} - Thumbnail`}
+                    width={1200}
+                    height={1200 * (9 / 16)}
+                    placeholder="blur"
+                    blurDataURL="/images/video_placeholder_165x103.svg"
+                  />
+                ) : (
+                  <Image
+                    src="/images/video_placeholder_165x103.svg"
+                    alt={`${drive.name} - Placeholder`}
+                    width={600}
+                    height={338}
+                  />
+                )}
+              </a>
+            ) : null}
+            <p>
+              <strong>Created on: </strong>
+              {drive.createdTime}
+            </p>
+            {drive.viewedByMeTime ? (
+              <p>
+                <strong>Last viewed: </strong>
+                {drive.viewedByMeTime}
+              </p>
+            ) : null}
+            {drive.duration ? (
+              <p>
+                <strong>Duration: </strong>
+                {getDuration(parseInt(drive.duration ?? '0', 10))}
+              </p>
+            ) : null}
+            {/* <ModelForm key={`model_form-${drive.driveId}`} drive={drive} />
+            <DriveFileView key={`file_view-${drive.driveId}`} file={drive} source="drive-db" /> */}
+          </Suspense>
+        ) : <h2>No Db Data for id: {driveId}</h2>
+      }
+      {
+        api && api.data ? (
+          <Suspense fallback={<div>Loading Api Data...</div>}>
+            <h2>Api {api.data.name}</h2>
+          </Suspense>
+        ) : <h2>No Db data for api.data.id</h2>
+      }
+    </>
+  );
 };
 
 export default DriveDbFile;

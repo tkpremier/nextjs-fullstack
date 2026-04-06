@@ -18,8 +18,6 @@ const DriveDbFile = async ({ params }: { params: Promise<{ driveId: string }> })
   const { driveId } = await params;
   const [db, api] = await getDriveFile(driveId);
   const drive = db?.data ? Array.isArray(db?.data) && db.data.length > 0 ? db?.data[0] : db.data : { data: {} };
-  console.log('db: ', db);
-  console.log()
   return (
     <>
       {

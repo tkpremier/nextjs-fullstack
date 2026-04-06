@@ -42,6 +42,7 @@ export const useModels = (): HookReturn => {
         return res;
       })
       .catch(err => console.log('model-provider-err: ', err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [models, handleModels];

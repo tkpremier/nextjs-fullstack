@@ -18,7 +18,7 @@ export const createModel = async data => {
   }
   try {
     // Check if the column is GENERATED ALWAYS AS IDENTITY
-    const identityInfo = await dbQuery.query<{ is_identity: string; identity_generation: string }>(
+    const identityInfo = await dbQuery.query(
       `SELECT is_identity, identity_generation
        FROM information_schema.columns
        WHERE table_name = 'model' AND column_name = 'id'`,

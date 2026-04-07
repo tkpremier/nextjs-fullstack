@@ -1,11 +1,11 @@
-import { QueryResult } from 'pg';
+import { QueryResult, QueryResultRow } from 'pg';
 import pool from './pool';
 
-function query(queryText: string, params: any[]): Promise<QueryResult> {
+function query<T extends QueryResultRow = any>(queryText: string, params: unknown[]): Promise<QueryResult<T>> {
   return new Promise((resolve, reject) => {
     pool
-      .query(queryText, params)
-      .then((res: QueryResult) => {
+      .query<T>(queryText, params)
+      .then((res: QueryResult<T>) => {
         resolve(res);
       })
       .catch((err: Error) => {

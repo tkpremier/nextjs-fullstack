@@ -1,6 +1,10 @@
 import { Pool } from 'pg';
 
-let pool;
+declare global {
+  var postgresPool: Pool | undefined;
+}
+
+let pool: Pool;
 
 if (!global.postgresPool) {
   global.postgresPool = new Pool({

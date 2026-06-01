@@ -1,11 +1,4 @@
 services:
-  api:
-    env_file:
-      - ./.env
-      - ./.env.production
-    environment:
-      NODE_ENV: ${NODE_ENV}
-
   client:
     env_file:
       - ./.env

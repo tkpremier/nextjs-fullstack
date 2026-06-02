@@ -1,6 +1,7 @@
 networks:
   tk_net:
     driver: bridge
+    external: false
 
 services:
   db:
@@ -12,9 +13,9 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ./db-data:/var/lib/postgresql/data
-    networks: [ tk_net ]
+    networks: [tk_net]
     healthcheck:
-      test: [ 'CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}' ]
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 5s
       timeout: 5s
       retries: 10
@@ -25,6 +26,7 @@ services:
     env_file: []
     environment:
       PORT: ${CLIENT_PORT}
+      NODE_ENV: ${NODE_ENV}
       NEXT_PUBLIC_APP_BASE_URL: ${APP_BASE_URL}
       NEXT_PUBLIC_ADMIN_EMAILS: ${ADMIN_EMAILS}
     dns:
@@ -36,4 +38,19 @@ services:
     #   interval: 10s
     #   timeout: 3s
     #   retries: 10
-    networks: [ tk_net ]
+    networks: [tk_net]
+
+  caddy:
+    image: caddy:2.8
+    restart: unless-stopped
+    ports: ['80:80', '443:443']
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on: [client]
+    networks:
+      - tk_net # 👈 attach to the same network as client
+volumes:
+  caddy_data:
+  caddy_config:

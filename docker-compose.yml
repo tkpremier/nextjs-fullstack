@@ -32,7 +32,7 @@ services:
     dns:
       - 8.8.8.8
       - 8.8.4.4
-    # depends_on: [api]
+    depends_on: [db]
     # healthcheck:
     #   test: ['CMD', 'sh', '-c', 'wget -qO- http://localhost:3000/healthz|| exit 1']
     #   interval: 10s

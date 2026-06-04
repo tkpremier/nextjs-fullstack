@@ -40,7 +40,7 @@ export const ModelForm = ({
       'driveId'
     );
     const options = {
-      credentials: 'include',
+      credentials: 'include' as unknown as RequestCredentials,
       method: modelId === 0 ? 'POST' : 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8'
@@ -71,7 +71,7 @@ export const ModelForm = ({
   const updateDrive = useCallback(
     async (modelId: number, driveId: string = drive.id) => {
       const options = {
-        credentials: 'include',
+        credentials: 'include' as unknown as RequestCredentials,
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'

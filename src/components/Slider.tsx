@@ -1,8 +1,8 @@
 'use client';
-import classNames from 'classnames';
-import React, { Fragment, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import styles from '@/styles/carousel.module.scss';
 import { DEVICE_WIDTH_TYPES, ISlider, MediaQuery, Sizes, defaultSizes } from '@/types';
+import classNames from 'classnames';
+import React, { Fragment, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 const getMediaQueries = (): Map<DEVICE_WIDTH_TYPES, MediaQueryList> => {
   const sizeQueries = new Map([
     ['sm', '(max-width: 479px)'],
@@ -20,7 +20,7 @@ const getMediaQueries = (): Map<DEVICE_WIDTH_TYPES, MediaQueryList> => {
 export const Slider = (props: PropsWithChildren<ISlider>) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const intervalRef = useRef<NodeJS.Timer>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval>>(null);
   const mqlRef = useRef<MediaQuery>(null);
   const sizes = props.sizes || defaultSizes;
   const sizesRef = useRef({
@@ -158,8 +158,8 @@ export const Slider = (props: PropsWithChildren<ISlider>) => {
         curr.curIndex === -1
           ? React.Children.count(props.children) - 1
           : curr.curIndex === React.Children.count(props.children)
-          ? 0
-          : curr.curIndex
+            ? 0
+            : curr.curIndex
     }));
   }, [state.curIndex]);
 

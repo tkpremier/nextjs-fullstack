@@ -1,7 +1,5 @@
-import Link from 'next/link';
-
-export const UnauthenticatedFallback = ({ loginUrl = '/' }: { loginUrl: string }) => (
+export const UnauthenticatedFallback = ({ loginUrl = '/auth/login' }: { loginUrl: string }) => (
   <h1>
-    <Link href={loginUrl}>Please login</Link>
+    <a href={loginUrl}>Please login</a>
   </h1>
 );

@@ -52,7 +52,7 @@ export const Header = () => {
               <Link href="/interview">Interviews</Link>
             </li> */}
             <li className={styles.headerNavItem}>
-              {user ? <Link href="/auth/logout">Logout</Link> : <Link href={loginUrl}>Login</Link>}
+              {user ? <a href="/auth/logout">Logout</a> : <a href={loginUrl}>Login</a>}
             </li>
             <li className={classNames(styles.headerNavItem, styles.headerNavItemLogo)}>
               <button

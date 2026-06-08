@@ -11,9 +11,7 @@ const Profile = () => {
 
   const loginUrl = useMemo(() => {
     const currentUrl = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '');
-    return `${process.env.NEXT_PUBLIC_APP_BASE_URL}/login${
-      currentUrl ? `?returnTo=${encodeURIComponent(currentUrl)}` : ''
-    }`;
+    return `/auth/login${currentUrl ? `?returnTo=${encodeURIComponent(currentUrl)}` : ''}`;
   }, [pathname, searchParams]);
 
   return (

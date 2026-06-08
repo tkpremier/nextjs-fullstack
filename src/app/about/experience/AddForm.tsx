@@ -8,7 +8,7 @@ import { Editor as CKEditor } from 'ckeditor5';
 import serialize from 'form-serialize';
 import { FormEvent, useCallback, useState } from 'react';
 
-const isAdmin = (email: string) => process.env.NEXT_PUBLIC_ADMIN_EMAILS.includes(email);
+const isAdmin = (email: string) => process.env.NEXT_PUBLIC_ADMIN_EMAILS?.includes(email) ?? false;
 
 const AddForm = ({ name, description }: Omit<ExperienceDB, 'id'>) => {
   const { user } = useUser();

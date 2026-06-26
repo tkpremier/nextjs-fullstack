@@ -49,7 +49,6 @@ const nextConfig: NextConfig = {
   },
   output: 'standalone',
   reactStrictMode: true,
-  transpilePackages: ['ckeditor5', '@ckeditor/ckeditor5-react'],
   // Turbopack configuration for Next.js 16.0+
   turbopack: {
     root: __dirname,

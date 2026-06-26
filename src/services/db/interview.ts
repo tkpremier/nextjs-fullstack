@@ -9,7 +9,6 @@ export const getInterview = async () => {
       console.log('There are no interviews');
       return { data: [] };
     }
-    console.log('Interviews: ', data);
     return { data };
   } catch (error) {
     console.error('An error occurred fetching interviews', error);

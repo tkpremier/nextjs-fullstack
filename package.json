@@ -14,7 +14,7 @@
   "type": "module",
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.14.0",
-    "@ckeditor/ckeditor5-react": "^11.0.1",
+    "@ckeditor/ckeditor5-react": "^11.2.0",
     "@date-fns/tz": "^1.4.1",
     "ckeditor5": "^47.3.0",
     "classnames": "^2.5.1",

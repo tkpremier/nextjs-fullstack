@@ -1,11 +1,10 @@
 'use client';
-
 import { EditorProps } from '@/types';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { CKEditor as Editor } from '@ckeditor/ckeditor5-react';
 import { Bold, ClassicEditor, Essentials, Italic, Link, List, Paragraph } from 'ckeditor5';
 import 'react';
 
-export const CKEditorComponent = (props: EditorProps) => {
+export default (props: EditorProps) => {
   const editorConfig = {
     licenseKey: 'GPL',
     plugins: [Essentials, Paragraph, Bold, Italic, Link, List],
@@ -14,11 +13,10 @@ export const CKEditorComponent = (props: EditorProps) => {
   };
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <CKEditor
+      <Editor
         id={props.id ?? ''}
         editor={ClassicEditor}
         config={editorConfig}
-        data={props.data}
         onChange={(_event, editor) => {
           if (props.onChange) {
             props.onChange({ name: 'change', path: [], source: editor }, editor);

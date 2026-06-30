@@ -1,6 +1,5 @@
 import js from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
 import nextConfig from 'eslint-config-next';
 import prettierConfig from 'eslint-config-prettier';
 import nPlugin from 'eslint-plugin-n';
@@ -14,10 +13,12 @@ export default defineConfig([
     ignores: ['node_modules/**', '.next/**', '*.config.js', '*.config.*s']
   },
   js.configs.recommended,
+  // eslint-config-next already registers the `@typescript-eslint` plugin and
+  // parser for .ts/.tsx files, so we must not redefine them below.
+  ...nextConfig,
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     plugins: {
-      '@typescript-eslint': tseslint,
       prettier: prettierPlugin,
       'unused-imports': unusedImports,
       n: nPlugin
@@ -31,15 +32,9 @@ export default defineConfig([
         React: 'readonly',
         RequestCredentials: 'readonly',
         RequestInit: 'readonly'
-      },
-      parser: tsParser,
-      parserOptions: {
-        ecmaVersion: 2022,
-        sourceType: 'module'
       }
     },
     rules: {
-      ...(tseslint.configs.recommended || {}).rules,
       'quote-props': ['error', 'as-needed', { unnecessary: false }],
       'comma-dangle': ['error', 'never'],
       'func-names': ['off'],
@@ -59,11 +54,16 @@ export default defineConfig([
           args: 'after-used',
           argsIgnorePattern: '^_'
         }
-      ],
+      ]
+    }
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    rules: {
+      ...(tseslint.configs.recommended || {}).rules,
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'warn'
     }
   },
-  nextConfig,
   prettierConfig
 ]);

@@ -31,6 +31,7 @@ export const updateExp = async (payload = []) => {
     WHERE id = $3
     returning *`;
   try {
+    console.log('updateExpQuery: ', updateExpQuery);
     if (payload.length > 0) {
       const { rows: data } = await dbQuery.query(updateExpQuery, payload);
       if (data[0] === undefined) {
@@ -42,7 +43,7 @@ export const updateExp = async (payload = []) => {
     throw new Error('No data provided from client');
   } catch (error) {
     console.error('An error occurred updating experiences', error);
-    return { data: [], error };
+    return error;
   }
 };
 

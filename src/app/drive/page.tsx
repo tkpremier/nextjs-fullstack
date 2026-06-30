@@ -22,18 +22,17 @@ const getDriveFromApi = async () => {
         (f: GoogleDriveAPIResponse) =>
           f.id != null && f.name != null && f.mimeType != null && f.webViewLink != null && f.createdTime != null
       )
-      .map(f => {
-        return {
-          ...f,
-          createdTime: format(new Date(f.createdTime as string), 'MM/dd/yyyy, h:mm a'),
-          viewedByMeTime: f.viewedByMeTime ? format(new Date(f.viewedByMeTime), 'MM/dd/yyyy, h:mm a') : null
-        } as unknown as MergedData;
-      });
+      .map(f => ({
+        ...f,
+        createdTime: format(new Date(f.createdTime as string), 'MM/dd/yyyy, h:mm a'),
+        viewedByMeTime: f.viewedByMeTime ? format(new Date(f.viewedByMeTime), 'MM/dd/yyyy, h:mm a') : null
+      } as unknown as MergedData));
     return {
       files,
       nextPageToken: data.nextPageToken
     };
   } catch (error) {
+    console.error('error: ', error);
     return { files: [], nextPageToken: '' };
   }
 };
